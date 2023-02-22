@@ -1,0 +1,64 @@
+baseURL: http://dvcorreia.github.io
+title: dvcorreia
+
+menu:
+  main:
+    - name: Contact
+      url: /contact/
+      weight: 30
+    - name: Articles
+      url: /articles/
+      weight: 20
+
+params:
+  author: Diogo Correia
+  defaultTheme: light
+  disableThemeToggle: false
+  ShowShareButtons: true
+  ShowReadingTime: true
+  displayFullLangName: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+
+  profileMode:
+    enabled: true
+    title: Diogo Correia
+    description: |
+      Hello, I am Diogo.
+      I am a software programmer.
+    imageUrl: "/images/me.svg"
+    imageTitle: me myself and i
+    # imageWidth: 120
+    # imageHeight: 120
+    buttons:
+      - name: ⇩ CV
+        url: https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf
+  mainSections:
+    - articles
+# <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here">Email Us</a>
+  socialIcons:
+    - name: github
+      url: "https://github.com/dvcorreia"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/diogovalacorreia/"
+    - name: rss
+      url: "index.xml"
+    - name: email
+      url: "mailto:dv_correia@hotmail.com?subject=[dvcorreia.com] Hello, thanks for writting. Please, state your concern."
+
+  # change favicon in images folder (icon for web tab)
+  assets:
+    favicon: "/images/favicon.ico"
+    favicon16x16: "/images/favicon-16x16.png"
+    favicon32x32: "/images/favicon-32x32.png"
+    apple_touch_icon: "/images/apple-touch-icon.png"
+    safari_pinned_tab: "/images/apple-touch-icon.png"
+
+enableInlineShortcodes: true
+enableRobotsTXT: true
+enableEmoji: true
+pygmentsUseClasses: true
+
+minify:
+  disableXML: true
