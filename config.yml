@@ -27,7 +27,7 @@ params:
     description: |
       Hello, I am Diogo.
       I am a software programmer.
-    imageUrl: "/images/me.svg"
+    imageUrl: "/images/me.jpg"
     imageTitle: me myself and i
     # imageWidth: 120
     # imageHeight: 120
@@ -36,7 +36,7 @@ params:
         url: https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf
   mainSections:
     - articles
-# <a href="mailto:someone@yoursite.com?cc=someoneelse@theirsite.com, another@thatsite.com, me@mysite.com&bcc=lastperson@theirsite.com&subject=Big%20News&body=Body-goes-here">Email Us</a>
+
   socialIcons:
     - name: github
       url: "https://github.com/dvcorreia"
@@ -49,11 +49,7 @@ params:
 
   # change favicon in images folder (icon for web tab)
   assets:
-    favicon: "/images/favicon.ico"
-    favicon16x16: "/images/favicon-16x16.png"
-    favicon32x32: "/images/favicon-32x32.png"
-    apple_touch_icon: "/images/apple-touch-icon.png"
-    safari_pinned_tab: "/images/apple-touch-icon.png"
+    favicon: "/favicon.ico"
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
