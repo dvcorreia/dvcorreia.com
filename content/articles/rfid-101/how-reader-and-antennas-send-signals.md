@@ -1,8 +1,7 @@
 ---
-title: "RFID Chapter 3: Reader and Antenna"
+title: "RFID 101: how reader and antennas send signal for tags to ear"
 date: 2022-08-10
-summary: Tag
-description: Tag
+description: How reader and antennas send signal for tags to ear.
 
 draft: true
 ---

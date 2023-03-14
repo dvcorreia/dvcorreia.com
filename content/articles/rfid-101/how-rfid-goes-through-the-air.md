@@ -1,10 +1,8 @@
 ---
-title: "RFID Chapter 1: Electromagnetic concepts"
-summary: 
-description: Same as the summary
+title: "RFID 101: how it goes through the air"
+description: An overview of electro-magnetic and radio concepts.
 
 draft: true
-weight: 1
 ---
 
 Before presenting the intrinsics around RFID (Radio Frequency Identification) system components, a basic expertise in EM concepts is paramount.

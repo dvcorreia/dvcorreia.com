@@ -27,7 +27,7 @@ params:
     description: |
       Hello, I am Diogo.
       I am a software programmer.
-    imageUrl: "/images/me.jpg"
+    imageUrl: "/images/me2.jpg"
     imageTitle: me myself and i
     # imageWidth: 120
     # imageHeight: 120
@@ -46,7 +46,7 @@ params:
       url: "index.xml"
     - name: email
       url: "mailto:dv_correia@hotmail.com?subject=[dvcorreia.com] Hello, thanks for writting. Please, state your concern."
-
+  
   # change favicon in images folder (icon for web tab)
   assets:
     favicon: "/favicon.ico"

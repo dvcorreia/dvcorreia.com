@@ -1,31 +1,11 @@
 ---
-title: "UHF RFID Series: Introduction"
-date: 2022-08-03
-description: Technical introductions to UHF RFID can be daunting. In this blog series I will make a complete introduction to UHF RFID technology and establish a base level for you to try and explore this technology.
+title: "RFID 101: History of RFID"
+description: A small overview of the history of RFID and how it came to be. 
+topic: rfid
 
 draft: true
-weight: 1
---- 
+---
 
-## What is RFID?
-
-RFID (or radio identification) is any technology that uses radio waves or electro-magnetic fields to identify and collect data from things.
-You see it everywhere: 
-
-- Apple pay, Google pay and most credit cards use RFID to identify and authorize payments.
-- Toll roads in most European countries have RFID systems to automatically charge customers.
-- Building and hotels access cards.
-
-{{< figure
-    height="300"
-    alt="RFID payment with American Express creditcard through Apple Pay"
-    caption="RFID payment with American Express creditcard through Apple Pay"
-    src="cardmapr-nl-XH2JFgT4Abc-unsplash.jpg" >}}
-
-
-UHF RFID is a specific subgroup of this technology, that shows a few characteristics that are really appealing for certain applications. We will dive deeper on this matter in latter chapters. For now lets understand its origins and how was adapter over the years.
-
-## History
 
 The concept of identifying things using RF (Radio Frequency) dates back to the late 1930s.
 By this time, the primitive biplanes made of wood and fabric used in Word War I, had evolved to all-metal monoplanes. They were capable of carrying heavy quantities of explosives and travel at hundreds of kilometers per hour, making the conventional method of visual identification of incoming aircrafts obsolete.
@@ -75,5 +55,3 @@ Another big issue was the standardization of coding schemes in RF tags. The figh
 In the last decade, despite the advancements in the industry and adoption by big apparel retailers like Zara, Decathlon and Marks & Spencer [^9], there are issues that inhibit wide-scale adoption of UHF RFID. 
 
 [^9]: RFID in Retail Apparel, [https://gaorfid.com/rfid-in-retail-apparel/](https://gaorfid.com/rfid-in-retail-apparel/).
-
-These problems will be further discussed in next chapters.
