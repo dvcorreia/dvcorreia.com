@@ -1,15 +1,13 @@
----
-title: Organizing code by teams sucks
-dateMonthYear: Feb 2023
-type: page
-description:
-topic: teams
-# link: "https://www.mathbraintrainer.com"
-# image: "/images/braintrainer.png"
-
-draft: true
-weight: 1
----
++++
+title = "Organizing code by teams sucks"
+date = "2023-02-10"
+description = "Toughs about how everything is not that different and why we should strive for value and transparency as a state of people"
+tags = [
+    "code",
+    "teams"
+]
+draft = true
++++
 
 > Disclaimer: this post shares my own personal opinion and does not
 > mirror the opinion or case of my employer.

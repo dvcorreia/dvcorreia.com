@@ -1,16 +1,42 @@
 {{ define "main" }}
 {{ if eq .Type "blog" }}{{ if not .Params.menu }}
-<h1>{{ .Title }}</h1>
-<p>
-  <i>
-    <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
-      {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
-    </time>
-  </i>
-</p>
+{{- /*
+	h/t to Joe Mooring's answer in
+	https://discourse.gohugo.io/t/count-word-function-customized-to-exclude-code/34380
+*/ -}}
+{{- $wordsToCount := replaceRE `(?s)<div class="highlight">.*?</div>` "" .Content -}}
+{{- $wordsToCount = replaceRE `(?s)<details.*?</details>` "" $wordsToCount -}}
+{{- $wordsToCount = replaceRE `(?s)<div class="relative imgB.*?"></div>` "" $wordsToCount -}}
+{{- $wordsToCount = replaceRE `(?s)<style.*?</style>` "" $wordsToCount -}}
+{{- $wordCount := $wordsToCount | countwords -}}
+{{- $readingTimeMinsInt := div (float $wordCount) 225 | math.Floor -}}
+{{- $readingTime := div (float $wordCount) 225 -}}
+{{- $readingTimeMins := $readingTime | math.Ceil -}}
+{{- $readingTimeSecs := mul 60 (sub $readingTime $readingTimeMinsInt) | math.Ceil -}}
+{{- if ge $readingTimeSecs 60 -}}
+	{{- $readingTimeSecs = sub $readingTimeSecs 60 -}}
+	{{- $readingTimeMinsInt = add $readingTimeMinsInt 1 -}}
+{{- end -}}
+{{- $readingTimeSecsInt := printf "%02v" $readingTimeSecs -}}
+{{- $wordCountFmt := lang.FormatNumberCustom 0 $wordCount -}}
+<div style="text-align: center">
+  <h1>{{ .Title }}</h1>
+  <p>
+    <i>
+      <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
+        {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+      </time>
+    </i>
+    (hash: {{ .GitInfo.AbbreviatedHash }})<br>
+    Latest commit: {{ .GitInfo.AuthorDate | time.Format "2 Jan, 2006" }}<br>
+    <small>
+    Reading time: {{ $readingTimeMinsInt }}:{{ $readingTimeSecsInt }} &bull; {{ $wordCountFmt }} words
+  </small>
+  </p>
+</div>
 {{ end }}{{ end }}
 <content>
-  {{ .Content | emojify }}
+  {{ .Content | emojify | safeHTML }}
 </content>
 <p>
   {{ range (.GetTerms "tags") }}

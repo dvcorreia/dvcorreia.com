@@ -25,6 +25,9 @@ Great implementations of great ideias.
 So what is the purpose of the state?
 The state is just a company in which everyone above 18 (at least in Portugal) e an equal shareholder.
 
+
+inspection casa: history of Tencent and China and how it is similar to the giant tech companies and the Unites States and even the Portugal government.
+
 ---
 
 You want foundations in society. 
