@@ -2,6 +2,7 @@
 title = "How we do Go applications in 2022"
 date = "2023-02-26"
 description = "For the last 2 years at WHERE IS, we have been building a real-time location platform in Golang. I will go through our taught process on how we approach and maintain our codebase."
+categories = ["tech"]
 tags = [
     "go",
     "codebase"
@@ -69,10 +70,22 @@ It's such be a great language to teach in schools.
 Leet's look at an example: We have a service that is listening on a spectrum to retrieve earth satellite pictures.
 How would _func main_ look like? Let's exercise it:
 
-```go
-
+{{< highlight go >}}
 func main() {
-    log := 
+    log := logger.New()
 }
+{{< /highlight >}}
 
+```go
+func main() {
+    log := logger.New()
+}
 ```
+
+| dsfs | sdfs | fsdfs |
+|------|------|-------|
+| fsd  | fs   | dfs   |
+| sdfs | sdf  | fs    |
+
+
+> Dorothy followed her through many of the beautiful rooms in her castle.

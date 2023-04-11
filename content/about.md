@@ -1,13 +1,12 @@
 +++
-title = "About me"
+title = "About"
 menu = "main"
 +++
 
+{{< figure src="/images/me2.jpg" width="200px" title="> This is me" >}}
 
-- \[github\] -- [https://github.com/dvcorreia](https://github.com/dvcorreia)
-- \[linkedin\] -- [https://www.linkedin.com/in/diogovalacorreia/](https://www.linkedin.com/in/diogovalacorreia/)
-- \[rss\] -- [https://dvcorreia.com/index.xml](https://dvcorreia.com/index.xml)
-- \[email\] -- [https://dvcorreia.com/index.xml](mailto:dv_correia@hotmail.com)
-- \[cv\] -- [https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf](https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf)
- 
-![Me](/images/me2.jpg)
+- github: [github.com/dvcorreia](https://github.com/dvcorreia)
+- linkedin: [linkedin.com/in/diogovalacorreia/](https://www.linkedin.com/in/diogovalacorreia/)
+- email: [dv_correia@hotmail.com](mailto:dv_correia@hotmail.com)
+- cv: [github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf](https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf)
+- rss: [dvcorreia.com/index.xml](https://dvcorreia.com/index.xml)

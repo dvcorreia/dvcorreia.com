@@ -19,7 +19,7 @@
 {{- end -}}
 {{- $readingTimeSecsInt := printf "%02v" $readingTimeSecs -}}
 {{- $wordCountFmt := lang.FormatNumberCustom 0 $wordCount -}}
-<div style="text-align: center">
+<div>
   <h1>{{ .Title }}</h1>
   <p>
     <i>
@@ -27,11 +27,9 @@
         {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
       </time>
     </i>
-    (hash: {{ .GitInfo.AbbreviatedHash }})<br>
+    <br>
     Latest commit: {{ .GitInfo.AuthorDate | time.Format "2 Jan, 2006" }}<br>
-    <small>
-    Reading time: {{ $readingTimeMinsInt }}:{{ $readingTimeSecsInt }} &bull; {{ $wordCountFmt }} words
-  </small>
+    Reading time: {{ $readingTimeMinsInt }} minute{{ if ne $readingTimeMinsInt 1 }}s{{ end }} &bull; {{ $wordCountFmt }} words
   </p>
 </div>
 {{ end }}{{ end }}
