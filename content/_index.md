@@ -2,6 +2,7 @@
 
 ## 
 
+We are working on Hardware City!
 
 Some posts about things that I'm not qualified enough to talk about.
 
