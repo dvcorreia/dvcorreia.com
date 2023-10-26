@@ -2,7 +2,7 @@
 
 ## 
 
-We are working on Hardware City!
+We are working on Hardware City! And again.
 
 Some posts about things that I'm not qualified enough to talk about.
 
