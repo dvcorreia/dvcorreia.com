@@ -2,8 +2,6 @@
 
 ## 
 
-We are working on Hardware City! And again.
-
 Some posts about things that I'm not qualified enough to talk about.
 
 I am working on content which will be released as soon is being completed.
