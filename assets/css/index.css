@@ -146,21 +146,13 @@ img {
 }
 
 pre {
-	color: var(--code-foreground-color);
-	background-color: var(--code-background-color);
 	padding: 0.85rem 1rem;
 	font-size: 0.85rem;
+}
+
+.highlight div,
+.highlight pre {
   overflow-x: auto;
-}
-
-pre {
-  background-color: initial;
-  color: initial;
-}
-
-div.highlight code {
-  background-color: unset;
-  color: unset;
 }
 
 blockquote {

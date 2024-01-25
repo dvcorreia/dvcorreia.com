@@ -23,5 +23,5 @@ unsafe = true
 
 [markup]
   [markup.highlight]
-    style = 'github-dark'
+    style = 'swapoff'
     tabWidth = 4
