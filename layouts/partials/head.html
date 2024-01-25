@@ -13,4 +13,8 @@
 {{ if os.FileExists "static/site.webmanifest" }}<link rel="manifest" href="{{ "site.webmanifest" | absURL }}">{{ end }}
 
 <!-- css -->
-<link rel="stylesheet" href="{{ "css/index.css" | absURL }}">
+{{ $css := resources.Get "css/index.css" }}
+
+{{ with $css }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" />
+{{ end }}
