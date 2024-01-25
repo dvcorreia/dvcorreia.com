@@ -1,6 +1,6 @@
 # Base URL used when generating links to your pages
 # Set to the URL for your site
-baseURL = "https://dvcorreia.github.io"
+baseURL = "https://dvcorreia.com"
 timeZone = "Europe/London"
 
 # Basic metadata configuration for your blog.
