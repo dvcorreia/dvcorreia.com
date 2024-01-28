@@ -1,8 +1,8 @@
-Site textual content &copy; 2022&ndash;{{ now.Year}} <a href="{{ .Site.BaseURL }}">Diogo&nbsp;Correia</a>
-except&nbsp;where&nbsp;otherwise&nbsp;noted&nbsp;and/or&nbsp;quoting&nbsp;external&nbsp;sources.<br />
-For other site-wide disclaimers/credits, see the footer of the <a href="{{ printf "%sabout/" .Site.BaseURL }}">"About" page</a>.
+Site textual content &copy; 2022&ndash;{{ now.Year}} <a href="{{ .Site.BaseURL }}">Diogo Correia</a>
+except where otherwise noted and/or quoting external sources.<br />
+For other site-wide disclaimers/credits, see the footer of the <a href="{{ printf "%s/about/" .Site.BaseURL }}">"About" page</a>.
 
 {{ if eq ( trim .Page.RelPermalink "/") "about" }}
 <br><br>
-Displayed content statistics (word&nbsp;count and reading&nbsp;time) can vary based on the site-generation process. Site&nbsp;powered by <a href="https://gohugo.io/">Hugo</a>, template is a modified version of <a href="https://github.com/janraasch/hugo-bearblog/">janrassch/hugo-bear-blog</a>, which in turn is based on <a href="https://bearblog.dev/">bearblog.dev</a>, with styled heavily stolen from <a href="https://mattwidmann.net/">mattwidmann.net/</a> and hosted by Github Pages. Transparency policy inspired from <a href="https://www.brycewray.com/">brycewray.com</a>.
+Site powered by <a href="https://gohugo.io">Hugo</a>. Template is a modified version of <a href="https://github.com/janraasch/hugo-bearblog">janrassch/hugo-bear-blog</a>, which in turn is based on <a href="https://bearblog.dev">bearblog.dev</a>. Style is heavily inspired by <a href="https://mattwidmann.net">mattwidmann.net/</a> and this site is hosted by Github Pages.
 {{ end }}
