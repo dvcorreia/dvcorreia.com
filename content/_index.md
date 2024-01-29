@@ -5,7 +5,7 @@ menus:
     weight: 30
 ---
 
-Some posts about things that I'm not qualified enough to talk about.
+Some posts about things that I'm not qualified enough to talk about
 
 I am working on content which will be released as soon is being completed.
 Here is a set of blogs to read in the meantime --- not in any specific order:

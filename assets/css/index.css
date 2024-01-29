@@ -32,7 +32,7 @@
 
 /* ----- Responsive ----- */
 
-@media (max-width: 42.5rem) {
+@media (max-width: 640px) {
 	:root {
 		--body-left-margin: 1.5rem;
 	  --body-right-margin: 1.5rem;
@@ -72,9 +72,29 @@ body > header nav a { margin-right: 10px; }
 /* ----- Footer ----- */
 
 body > footer {
-  padding: 25px;
-  text-align: center;
+  padding: 25px 0;
   font-size: small;
+  max-width: 500px;
+
+  p {
+    margin-bottom: 7px;
+  }
+
+  nav a {
+    padding: 0 1px;
+  }
+
+  svg {
+    position: relative;
+    top: 3px;
+  }
+}
+
+@media (max-width: 1024px) {
+	body > footer {
+		text-align: center;
+    margin: auto;
+	}
 }
 
 /* ----- Articles ----- */
