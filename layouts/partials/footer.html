@@ -1,8 +1,21 @@
-Site textual content &copy; 2022&ndash;{{ now.Year}} <a href="{{ .Site.BaseURL }}">Diogo Correia</a>
-except where otherwise noted and/or quoting external sources.<br />
-For other site-wide disclaimers/credits, see the footer of the <a href="{{ printf "%s/about/" .Site.BaseURL }}">"About" page</a>.
+<p>
+  Site textual content &copy; 2022&ndash;{{ now.Year}} <a href="{{ .Site.BaseURL }}">Diogo Correia</a><br>
+  except where otherwise noted and/or quoting external sources.
+  For other site-wide disclaimers/credits, see the <a href="{{ printf "%s/colophon" .Site.BaseURL }}">Colophon</a>.
+</p>
 
-{{ if eq ( trim .Page.RelPermalink "/") "about" }}
-<br><br>
-Site powered by <a href="https://gohugo.io">Hugo</a>. Template is a modified version of <a href="https://github.com/janraasch/hugo-bearblog">janrassch/hugo-bear-blog</a>, which in turn is based on <a href="https://bearblog.dev">bearblog.dev</a>. Style is heavily inspired by <a href="https://mattwidmann.net">mattwidmann.net/</a> and this site is hosted by Github Pages.
-{{ end }}
+<nav>
+  <!-- RSS -->
+  <a title="RSS Feed" href="{{ .Site.BaseURL }}/index.xml">RSS{{ partial "icons/rss" . }}</a>
+
+  <!-- Footer menus -->
+  {{ range .Site.Menus.footer }}
+  · <a href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
+  {{ end }}
+
+  <!-- Social & Contact -->
+  · <a href="https://github.com/dvcorreia">Github {{ partial "icons/github" . }}</a>
+  · <a href="https://www.linkedin.com/in/diogovalacorreia/">Linkedin {{ partial "icons/linkedin" . }}</a>
+  · <a href="mailto:dv_correia@hotmail.com">Email {{ partial "icons/email" . }}</a>
+  · <a href="github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf">CV</a>
+</nav>
