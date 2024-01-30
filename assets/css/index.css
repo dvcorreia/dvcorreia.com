@@ -90,7 +90,7 @@ body > footer {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
 	body > footer {
 		text-align: center;
     margin: auto;
