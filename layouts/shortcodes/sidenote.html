@@ -1,0 +1,9 @@
+{{- $for := .Get "for" | default ( .Inner | md5 ) -}}
+<label class="sidenote" for="{{ $for }}">
+  <sup aria-describedby="{{ $for }}-ref"></sup>
+</label>
+<input class="sidenote-toggle" id="{{ $for }}" type="checkbox">
+<span class="sidenote" id="{{ $for }}-ref">
+  <sup></sup>
+  {{- .Inner | safeHTML -}}
+</span>
