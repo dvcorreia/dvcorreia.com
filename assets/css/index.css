@@ -182,6 +182,14 @@ blockquote {
   font-style: italic;
 }
 
+.footnotes {
+  font-size: 0.8rem;
+}
+
+.footnote-ref { font-size: 0.7rem; }
+.footnote-ref::before { content: " [~"; }
+.footnote-ref::after { content: "]"; }
+
 /* ----- Blog posts list ----- */
 ul.blog-posts {
   list-style-type: none;
@@ -195,3 +203,70 @@ ul.blog-posts li {
 ul.blog-posts li span {
   flex: 0 0 130px;
 }
+
+/* ------ Side Notes ------- */
+body {
+  counter-reset: sidenote-counter;
+}
+
+label.sidenote {
+  font-size: 0.8rem;
+  counter-increment: sidenote-counter;
+}
+label.sidenote sup {
+	font-size: 0.7rem;
+}
+label.sidenote sup::after {
+  content: "[¬"counter(sidenote-counter)"]";
+}
+
+input.sidenote-toggle { display: none; }
+
+
+@media (min-width: 1024px) {
+  span.sidenote sup {
+    font-size: 0.7rem;
+    margin-left: -0.7rem;
+  }
+  span.sidenote sup::before {
+    content: counter(sidenote-counter)".";
+  }
+  span.sidenote img {
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  span.sidenote {
+    position: relative;
+    float: right;
+    clear: right;
+    margin-bottom: 5px;
+    margin-right: calc(-100% + var(--width) - var(--body-width) - var(--body-left-margin) / 4 + 0.7rem);
+    width: calc(var(--width) - var(--body-width) - var(--body-left-margin));
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  span.sidenote { display: none; }
+
+  span.sidenote img {
+    padding: 7px 0;
+    display: block;
+  }
+
+  input.sidenote-toggle:checked + span.sidenote {
+    display: block;
+		position: relative;
+		float: left;
+		clear: both;
+		left: 0.25rem;
+		width: calc(95% - 0.25rem);
+		margin: 0.25rem 0rem;
+		padding: 0.25rem 1rem;
+		background-color: var(--code-background-color);
+  }
+  label.sidenote { cursor: pointer; color: var(--a-color); }
+	label.sidenote:hover { text-decoration: underline; }
+}
+
