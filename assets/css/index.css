@@ -17,6 +17,9 @@
   --a-color: #3273dc;
   --code-foreground-color: black;
   --code-background-color: #f0f0f0;
+
+  /* note: should match var(--a-color) */
+  --external-link-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='1rem' height='1rem' viewBox='0 0 256 256' %3E%3Cpath fill='%233273dc' d='M204 64v104a12 12 0 0 1-24 0V93L72.49 200.49a12 12 0 0 1-17-17L163 76H88a12 12 0 0 1 0-24h104a12 12 0 0 1 12 12' /%3E%3C/svg%3E");
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,9 +27,12 @@
     --background-color: hsl(0, 0%, 4%);
     --foreground-color: white;
     --foreground-color-faint: #ccc;
-    --a-color: hsl(200, 97%, 63%);
+    --a-color: #45bffc;
     --code-foreground-color: white;
     --code-background-color: #1a1a1a;
+
+    /* note: should match var(--a-color) */
+    --external-link-icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='1rem' height='1rem' viewBox='0 0 256 256' %3E%3Cpath fill='%2345bffc' d='M204 64v104a12 12 0 0 1-24 0V93L72.49 200.49a12 12 0 0 1-17-17L163 76H88a12 12 0 0 1 0-24h104a12 12 0 0 1 12 12' /%3E%3C/svg%3E");
   }
 }
 
@@ -113,6 +119,7 @@ h4 { margin-top: 0.8rem; font-size: 1rem; font-weight: 600 }
 
 a {
   color: var(--a-color);
+  white-space: nowrap;
 }
 
 a:link {
@@ -127,11 +134,16 @@ a:hover {
 main,
 footer {
   a[href*="//"]:not([href*="dvcorreia.com"]):after {
-    content: "\00A0↗";
+    content: var(--external-link-icon);
+    position: relative;
+    left: 2px;
+    top: 2px;
   }
 
   a[href^="http:"]:after {
     content: "\00A0!" !important;
+    left: 0px !important;
+    top: 0px !important;
   }
 
   a[href$=".pdf"]:after,
@@ -158,20 +170,23 @@ article ul::marker { font-size: 0.9rem; }
 img {
   display: block;
   max-width: calc(100% - 0.5rem);
-  padding: 0rem 1rem 1rem 1rem ;
+  padding: 0 1rem 1rem 1rem ;
   margin: auto;
+}
+
+@media (max-width: 450px) {
+  img {
+    padding: 0 0 1rem 0;
+  }
 }
 
 @media (min-width: 450px) {
-  img[src*="#left"] { float: left; }
-  img[src*="#right"] { float: right; }
+  img[src*="#left"] { float: left; max-width: 30%; padding-bottom: 0.5rem; }
+  img[src*="#right"] { float: right; max-width: 30%; padding-bottom: 0.5rem; }
 }
 
 figure { margin: 0; }
-figure img {
-  display: block;
-  margin: auto;
-}
+
 figure figcaption h4{
   text-align: center;
   font-style: italic;

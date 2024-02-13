@@ -33,7 +33,7 @@ The following HTML `<h1>`—`<h6>` elements represent six levels of section head
 
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi{{% sidenote %}}
 Lorem ipsum dolor sit amet, [consectetur](https://google.com) adipiscing elit. Proin tempor mattis vestibulum. Morbi placerat est sed sem euismod interdum. Ut auctor eget velit sit amet ultricies.
-![20th century boys](https://static.wikia.nocookie.net/20thcenturyboys/images/a/a6/Friend.jpg)
+![20th century boys](20th-century-boys.jpeg)
 {{% /sidenote %}} aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat{{% sidenote %}}
 Curabitur diam purus, dapibus vitae blandit vel, venenatis nec risus. Phasellus non porta mi, eu finibus enim. Etiam vulputate magna vitae enim lobortis euismod. Ut justo lacus, lacinia sed sapien quis, lacinia consequat erat.
 {{% /sidenote %}}.
@@ -52,18 +52,18 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ### Markdown Image
 
-![20th century boys >](https://static.wikia.nocookie.net/20thcenturyboys/images/a/a6/Friend.jpg#left)
+![20th century boys](./20th-century-boys.jpeg#left)
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-![20th century boys <](https://static.wikia.nocookie.net/20thcenturyboys/images/a/a6/Friend.jpg#right)
+![20th century boys](./20th-century-boys.jpeg#right)
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-![20th century boys ><](https://static.wikia.nocookie.net/20thcenturyboys/images/a/a6/Friend.jpg)
+![20th century boys](./20th-century-boys.jpeg)
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 ### Figure Shortcode
 
-{{< figure src="https://static.wikia.nocookie.net/20thcenturyboys/images/a/a6/Friend.jpg" title="20th century boys" alt="20th century boys" width="60%">}}
+{{< figure src="20th-century-boys.jpeg" title="20th century boys" alt="20th century boys" width="30%">}}
 
 ## Blockquotes
 
