@@ -93,6 +93,7 @@ body > footer {
   svg {
     position: relative;
     top: 3px;
+    padding-left: 2px;
   }
 }
 
