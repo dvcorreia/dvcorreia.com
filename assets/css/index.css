@@ -165,8 +165,8 @@ kbd {
 
 /* ----- Blocks ----- */
 
-article ul li { list-style-type: '-  '; }
-article ul::marker { font-size: 0.9rem; }
+main ul li { list-style-type: '-  '; }
+main ul::marker { font-size: 0.9rem; }
 
 img {
   display: block;
@@ -226,7 +226,7 @@ blockquote {
 }
 
 .footnote-ref { font-size: 0.7rem; }
-.footnote-ref::before { content: " [~"; }
+.footnote-ref::before { content: " ["; }
 .footnote-ref::after { content: "]"; }
 
 /* ----- Blog posts list ----- */
@@ -256,7 +256,7 @@ label.sidenote sup {
 	font-size: 0.7rem;
 }
 label.sidenote sup::after {
-  content: "("counter(sidenote-counter)")";
+  content: counter(sidenote-counter)".";
 }
 
 input.sidenote-toggle { display: none; }
