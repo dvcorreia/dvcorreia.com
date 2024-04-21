@@ -1,8 +1,25 @@
 <h1 id="website-title">
-  <a id="site-title" href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
+  <a href="{{ .Site.BaseURL }}">
+  <pre>
+     _____                       ___
+    /  /::\         ___         /  /\
+   /  /:/\:\       /__/\       /  /:/
+  /  /:/  \:\      \  \:\     /  /:/
+ /__/:/ \__\:|      \  \:\   /  /:/  ___
+ \  \:\ /  /:/  ___  \__\:\ /__/:/  /  /\
+  \  \:\  /:/  /__/\ |  |:| \  \:\ /  /:/
+   \  \:\/:/   \  \:\|  |:|  \  \:\  /:/
+    \  \::/     \  \:\__|:|   \  \:\/:/
+     \__\/       \__\::::/     \  \::/
+                     ~~~~       \__\/
+  </pre>
+  </a>
 </h1>
 <nav>
+  {{ $currentPage := . }}
   {{ range .Site.Menus.main }}
-  <a href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
+  <a href="{{ .URL | absLangURL }}" title="{{ .Title }}"  {{ if $currentPage.IsMenuCurrent .Menu . }}class="active"{{ end }}>
+    {{ .Name }}
+  </a>
   {{ end }}
 </nav>
