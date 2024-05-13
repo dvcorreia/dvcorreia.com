@@ -65,20 +65,7 @@ body {
 
 /* ----- Header ----- */
 
-body > header nav a {
-  position: relative;
-  padding-right: 20px;
-  padding-left: 16px;
-}
-body > header nav a.active {
-  color: color-mix(in srgb,var(--a-color),#fff 10%);
-}
-body > header nav a.active::before {
-  content: "▶";
-  position: absolute;
-  left: 0; /* Position it to the left inside the <a> element */
-  top: -1; /* Adjust if needed for vertical alignment */
-}
+body > header nav a { margin-right: 10px; }
 
 #website-title {
   font-size: 1.6rem;
