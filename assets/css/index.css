@@ -8,6 +8,7 @@
   --text-font: -apple-system, system-ui, sans-serif;
 
   --body-width: 40rem;
+  --body-top-margin: 2.5rem;
 	--body-left-margin: 2.5rem;
 	--body-right-margin: 2.5rem;
 
@@ -53,6 +54,7 @@ html {
 
 body {
   max-width: var(--body-width);
+  margin-top: var(--body-top-margin);
   margin-left: var(--body-left-margin);
 	margin-right: var(--body-right-margin);
   font-family: var(--text-font);
@@ -66,14 +68,6 @@ body {
 /* ----- Header ----- */
 
 body > header nav a { margin-right: 10px; }
-
-#website-title {
-  font-size: 1.6rem;
-}
-#website-title a {
-  text-decoration: none;
-  color: var(--foreground-color);
-}
 
 /* ----- Footer ----- */
 
