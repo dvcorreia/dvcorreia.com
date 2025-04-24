@@ -3,20 +3,38 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        buildDeps = with pkgs; [ git hugo gnumake ];
-        devDeps = with pkgs;
-          buildDeps ++ [
-          ];
-      in
-      { devShell = pkgs.mkShell { buildInputs = devDeps; }; }
-    );
+  outputs =
+    { self, nixpkgs, ... }:
+    let
+      supportedSystems = [
+        "aarch64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
 
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+      nixpkgsFor = forAllSystems (
+        system:
+        import nixpkgs {
+          inherit system;
+        }
+      );
+    in
+    {
+      formatter = forAllSystems (system: (nixpkgsFor.${system}).nixfmt-tree);
+      devShells = forAllSystems (
+        system: with nixpkgsFor.${system}; {
+          default = mkShell {
+            packages = [
+              git
+              gnumake
+              hugo
+            ];
+          };
+        }
+      );
+    };
 }
