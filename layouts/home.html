@@ -1,7 +1,7 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
   {{ .Content }}
-  {{ range .Pages }}
+  {{ range first 5 (where site.RegularPages "Section" "blog") }}
     <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ .Summary }}
   {{ end }}
 {{ end }}

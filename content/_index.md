@@ -1,8 +1,5 @@
 ---
 title: Home
-menus:
-  main:
-    weight: 30
 ---
 
 Some posts about things that I'm not qualified enough to talk about
