@@ -37,20 +37,7 @@
   }
 }
 
-/* ----- Responsive ----- */
-
-@media (max-width: 640px) {
-	:root {
-		--body-left-margin: 1.5rem;
-	  --body-right-margin: 1.5rem;
-	}
-}
-
 /* ----- Layout ----- */
-
-html {
-  margin: 0;
-}
 
 body {
   max-width: var(--body-width);
@@ -67,7 +54,18 @@ body {
 
 /* ----- Header ----- */
 
-body > header nav a { margin-right: 10px; }
+body > header nav{
+  ul { padding: 0; }
+
+  li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  li:last-child {
+    margin-right: 0;
+  }
+}
 
 /* ----- Footer ----- */
 
@@ -78,6 +76,7 @@ body > footer {
 
   p {
     margin-bottom: 7px;
+    text-wrap: pretty;
   }
 
   nav a {
@@ -100,8 +99,12 @@ body > footer {
 
 /* ----- Articles ----- */
 
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
 h1 {
-  font-size: 1.4;
+  font-size: 1.4rem;
   line-height: 1;
   font-weight: 500;
   padding: 0.8rem 0 0.5rem 0;
@@ -127,6 +130,8 @@ a:hover {
 
 main,
 footer {
+  a { white-space: nowrap; }
+
   a[href*="//"]:not([href*="dvcorreia.com"]):after {
     content: var(--external-link-icon);
     position: relative;

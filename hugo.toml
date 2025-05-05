@@ -1,0 +1,50 @@
+# Base URL used when generating links to your pages
+# Set to the URL for your site
+baseURL = "https://dvcorreia.com"
+
+languageCode = "en-US"
+timeZone = "Europe/London"
+
+# Basic metadata configuration for your blog.
+title = "Diogo Correia"
+author = "Diogo Correia"
+
+[params]
+  description = "Personal website of Diogo Correia. Contains some posts about things that he's not qualified enough to talk about."
+
+enableGitInfo = true
+
+# Generate a nice robots.txt for SEO
+enableRobotsTXT = true
+
+[taxonomies]
+  category = 'categories'
+  tag = 'tags'
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+
+  [[menus.main]]
+    name = "Blog"
+    pageRef = "/blog"
+    weight = 20
+
+  [[menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    style = "swapoff"
+    tabWidth = 4
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.146.0"

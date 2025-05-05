@@ -1,6 +1,1 @@
-<nav>
-  {{ $currentPage := . }}
-  {{ range .Site.Menus.main }}
-  <a href="{{ .URL | absLangURL }}" title="{{ .Title }}">{{ .Name }}</a>
-  {{ end }}
-</nav>
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }}

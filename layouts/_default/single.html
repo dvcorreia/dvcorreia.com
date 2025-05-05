@@ -4,21 +4,16 @@
   <header>
     <h1>{{ .Title }}</h1>
     {{ if not .Date.IsZero }}
+    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $dateHuman := .Date | time.Format ":date_long" }}
     <i>
-      <time datetime='{{ .Date.Format "02 Jan, 2006" }}' pubdate>
-        {{ .Date.Format "02 Jan, 2006" }}
-      </time>
+      <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
     </i>
     {{ end }}
   </header>
 
   {{ .Content }}
-
-  <p>
-    {{ range (.GetTerms "tags") }}
-    <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
-    {{ end }}
-  </p>
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 </article>
 
 {{ end }}

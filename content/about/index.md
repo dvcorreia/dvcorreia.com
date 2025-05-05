@@ -1,6 +1,5 @@
 ---
 title: About
-menu: main
 ---
 
 Welcome to my personal space where I share my software engineering experiences and opinions.
