@@ -6,7 +6,7 @@ languageCode = "en-US"
 timeZone = "Europe/London"
 
 # Basic metadata configuration for your blog.
-title = "dvcorreia"
+title = "Diogo Correia"
 author = "Diogo Correia"
 
 [params]
@@ -31,11 +31,6 @@ enableRobotsTXT = true
     name = "Blog"
     pageRef = "/blog"
     weight = 20
-
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
 
   [[menus.main]]
     name = "About"

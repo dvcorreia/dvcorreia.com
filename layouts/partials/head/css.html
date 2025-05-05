@@ -1,8 +1,9 @@
-{{- with resources.Get "css/main.css" }}
+{{- $opts := dict "inlineImports" true -}}
+{{- with resources.Get "css/main.css" | postCSS $opts }}
   {{- if hugo.IsDevelopment }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
   {{- else }}
-    {{- with . | minify | fingerprint }}
+    {{- with . | fingerprint }}
       <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{- end }}
   {{- end }}

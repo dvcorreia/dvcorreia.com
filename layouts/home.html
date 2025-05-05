@@ -1,7 +1,43 @@
 {{ define "main" }}
   {{ .Content }}
-  {{ range first 5 (where site.RegularPages "Section" "blog") }}
-    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-    {{ .Summary }}
-  {{ end }}
+
+  <style>
+    .latest-posts {
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      p {
+        margin-top: 8px;
+      }
+    }
+
+    .latest-posts-header {
+      display: flex;
+      justify-content: space-between;
+
+      h4 {
+        margin: 0;
+      }
+    }
+  </style>
+
+  <div class="latest-posts">
+    {{ range first 5 (where site.RegularPages "Section" "blog") }}
+    <div>
+      <div class="latest-posts-header">
+        <h4><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h4>
+        {{ if not .Date.IsZero }}
+        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+        {{ $dateHuman := .Date | time.Format ":date_long" }}
+        <i>
+          <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </i>
+        {{ end }}
+      </div>
+      {{ .Summary }}
+    </div>
+    {{ end }}
+  </div>
 {{ end }}
