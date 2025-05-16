@@ -1,25 +1,26 @@
 <aside>
   <dl>
     {{ if not .Date.IsZero }}
-    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-    {{ $dateHuman := .Date | time.Format ":date_long" }}
-    <dt>Created</dt>
-    <dd><time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></dd>
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <dt>Created</dt>
+      <dd><time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></dd>
     {{ end }}
-    {{ if not .Lastmod.IsZero }}
-    {{ $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" }}
-    {{ $lastmodHuman := .Lastmod | time.Format ":date_long" }}
-    <dt>Updated</dt>
-    <dd><time datetime="{{ $lastmodMachine }}">{{ $lastmodHuman }}</time></dd>
+    {{ with .GitInfo }}
+      {{ $lastmodMachine := .CommitDate | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $lastmodHuman := .CommitDate | time.Format ":date_long" }}
+      <dt>Updated</dt>
+      <dd><time datetime="{{ $lastmodMachine }}">{{ $lastmodHuman }}</time></dd>
     {{ end }}
+
     <dt>Length</dt>
-    <dd>{{ .WordCount }} words (~{{ div .WordCount 200 }} minutes)</dd>
+    <dd>{{ .WordCount }} words (~{{ .ReadingTime }} minutes)</dd>
     {{ if .Params.status }}
-    <dt>Status</dt>
-    <dd>{{ .Params.status }}</dd>
+      <dt>Status</dt>
+      <dd>{{ .Params.status }}</dd>
     {{ end }}
   </dl>
-  {{ if .TableOfContents }}
+  {{ if .Params.toc | default true }}
   {{- partial "inline/toc.html" . }}
   {{ end }}
 

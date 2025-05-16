@@ -1,4 +1,4 @@
-{{ if .TableOfContents }}
+{{ if .Params.toc | default true }}
 <nav>
   <p class="contents-heading">Contents</p>
   {{- range .Fragments.Headings }}

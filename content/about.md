@@ -1,5 +1,6 @@
 ---
 title: About
+toc: false
 ---
 
 Welcome to my personal space where I share my software engineering experiences and opinions.
