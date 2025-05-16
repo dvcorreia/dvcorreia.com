@@ -1,0 +1,23 @@
+/* see: https://www.joshwcomeau.com/css/custom-css-reset/ /*
+
+/* use box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* remove default spaces  */
+* { margin: 0; padding: 0; }
+
+table {
+  border-collapse: collapse; /* collapses tables borders into a single border */
+  border-spacing: 0; /* sets zero spacing between table cells */
+}
+
+/* improve media defaults */
+:where(img, picture, video, canvas, svg) {
+  display: block;
+  max-width: 100%;
+}
+
+/* inherit fonts for form controls */
+:where(input, button, textarea, select) { font: inherit; }

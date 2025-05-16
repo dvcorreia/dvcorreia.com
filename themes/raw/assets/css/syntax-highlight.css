@@ -1,0 +1,15 @@
+/*
+To generate the chroma files:
+$ hugo gen chromastyles --style=github > _syntax-light.css
+$ hugo gen chromastyles --style=github-dark > _syntax-dark.css
+
+for more styles see: https://swapoff.org/chroma/playground/
+*/
+
+@media (prefers-color-scheme: light) {
+  @import "_syntax-light.css";
+}
+
+@media (prefers-color-scheme: dark) {
+  @import "_syntax-dark.css";
+}

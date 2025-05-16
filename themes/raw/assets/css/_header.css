@@ -1,0 +1,22 @@
+body > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: var(--left-margin);
+  margin-right: var(--right-margin);
+  margin-top: var(--left-margin);
+  margin-bottom: var(--left-margin);
+  max-width: var(--text-width);
+}
+
+body > header nav ul { padding: 0; }
+body > header nav li {
+  display: inline-block;
+  margin-right: 2rem;
+}
+body > header nav li:last-child {
+  margin-right: 0;
+}
+body > header nav a:link {
+  text-decoration: none;
+}

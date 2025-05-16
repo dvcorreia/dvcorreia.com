@@ -1,0 +1,22 @@
+body {
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.45;
+  font-family: var(--text-font);
+  text-rendering: optimizeLegibility;
+  font-variant-ligatures: common-ligatures;
+  hanging-punctuation: first last;
+}
+
+body > header nav, body > footer {
+	max-width: var(--text-width);
+  margin-left: var(--left-margin);
+  margin-right: var(--right-margin);
+}
+main > article > *:not(header), main > section > *:not(header) {
+	max-width: var(--text-width);
+}
+main > article > *, main > section > *:not(article) {
+	margin-left: var(--left-margin);
+	margin-right: var(--right-margin);
+}

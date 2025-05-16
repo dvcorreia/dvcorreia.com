@@ -1,0 +1,13 @@
+ul.blog-posts {
+  list-style-type: none;
+  padding: unset;
+}
+
+ul.blog-posts li {
+  display: flex;
+  margin: 0;
+}
+
+ul.blog-posts li span {
+  flex: 0 0 130px;
+}

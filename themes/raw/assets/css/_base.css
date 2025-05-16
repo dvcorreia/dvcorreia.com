@@ -1,0 +1,74 @@
+h1 {
+	font-size: 1.4rem;
+	font-weight: 500;
+	padding: 0.8rem 0 0.5rem 0;
+}
+h2 { padding-top: 0.75rem; font-size: 1.2rem; font-weight: 500; }
+h3 { padding-top: 0.75rem; font-size: 1.1rem; font-weight: 600; }
+h4 { margin-top: 0.8rem; font-size: 1rem; font-weight: 600 }
+
+/* avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/* improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+article p, footer p, aside p, pre, blockquote, article > ul {
+	margin-top: 0.9rem;
+}
+article header p { margin-top: 0; }
+
+a:link {
+	color: var(--fg);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.1rem;
+	text-decoration-color: var(--fg-light);
+}
+a:visited {
+	color: var(--fg);
+	text-decoration-color: var(--fg-light);
+}
+a:hover {
+	color: var(--link-hover);
+	text-decoration-color: var(--link-hover);
+}
+a:after { font-size: 0.6rem; vertical-align: super; }
+a[href*="//"]:not([href*="mattwidmann.net"]):after { content: "\00A0↗"; }
+a[href^="http:"]:after { content: "\00A0!" !important; }
+a[href$=".pdf"]:after, a[href$=".zip"]:after, a[href$=".gz"]:after {
+	content: "\00A0↓" !important;
+}
+sup { vertical-align: super; font-size: 0.8rem; line-height: 0; }
+
+blockquote {
+	quotes: none;
+	padding-left: 0.5rem;
+	border-left: 4px solid var(--q-border);
+	border-radius: 4px;
+}
+
+img {
+  display: block;
+  max-width: calc(100% - 0.5rem);
+  margin: auto;
+  padding: 0 1rem 1rem 1rem ;
+}
+figure img { margin: 0 auto; }
+figcaption { text-align: center; font-size: 0.9rem; color: var(--fg-figcaption); }
+@media (min-width: 62.5rem) {
+  img[src*="#left"] { float: left; max-width: 30%; padding-bottom: 0.5rem; }
+  img[src*="#right"] { float: right; max-width: 30%; padding-bottom: 0.5rem; }
+}
+
+hr { border-top: 1px solid #ccc; max-width: var(--width); margin: 16px 0; }
+
+main ul li { list-style-type: '–  '; margin-left: 1rem; }
+article ul ul { margin: 0; }
+article ol { padding-left: 2rem; max-width: calc(var(--text-width) - 2rem); }

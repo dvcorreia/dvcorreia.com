@@ -1,0 +1,39 @@
+@import "_reset.css";
+
+:root {
+  color-scheme: light dark;
+
+  --width: 60rem;
+  --text-width: 40rem;
+  --left-margin: 2.5rem;
+	--right-margin: 1rem;
+
+  --mono-font: ui-monospace, Menlo, Consolas, monospace;
+  --text-font: -apple-system, system-ui, Input, Helvetica, sans-serif;
+
+  --bg: #fff;
+  --fg: rgba(0, 0, 0, 0.95); --fg-faint: #777; --fg-light: hsl(0, 0%, 75%);
+  --fg-code: #000; --bg-code: #f0f0f0;
+  --link-hover: #005aff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #181818;
+		--fg: #eee; --fg-faint: #bbb; --fg-light: hsl(0, 0%, 35%);
+		--fg-code: #ddd; --bg-code: #282828;
+    --link-hover: #62b3ff;
+  }
+}
+
+@import "_mascot.css";
+@import "_base.css";
+@import "_layout.css";
+@import "_header.css";
+@import "_footer.css";
+@import "_code-blocks.css";
+
+@import "single/_aside.css";
+@import "single/_side-notes.css";
+
+@import "list/_blog-posts.css";

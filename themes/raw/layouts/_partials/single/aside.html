@@ -1,0 +1,48 @@
+<aside>
+  <dl>
+    {{ if not .Date.IsZero }}
+    {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $dateHuman := .Date | time.Format ":date_long" }}
+    <dt>Created</dt>
+    <dd><time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time></dd>
+    {{ end }}
+    {{ if not .Lastmod.IsZero }}
+    {{ $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" }}
+    {{ $lastmodHuman := .Lastmod | time.Format ":date_long" }}
+    <dt>Updated</dt>
+    <dd><time datetime="{{ $lastmodMachine }}">{{ $lastmodHuman }}</time></dd>
+    {{ end }}
+    <dt>Length</dt>
+    <dd>{{ .WordCount }} words (~{{ div .WordCount 200 }} minutes)</dd>
+    {{ if .Params.status }}
+    <dt>Status</dt>
+    <dd>{{ .Params.status }}</dd>
+    {{ end }}
+  </dl>
+  {{ if .TableOfContents }}
+  {{- partial "inline/toc.html" . }}
+  {{ end }}
+
+</aside>
+
+{{- define "_partials/inline/toc.html"  }}
+<details class="contents">
+  <summary>Contents</summary>
+  <nav>
+    {{- range .Fragments.Headings }}
+    <ol>
+      {{- range .Headings }}
+      <li><a href="#{{ anchorize .ID }}">{{ .Title }}</a></li>
+      {{- if .Headings }}
+      <ol>
+        {{- range .Headings }}
+        <li><a href="#{{ anchorize .ID }}">{{ .Title }}</a></li>
+        {{- end }}
+      </ol>
+      {{- end }}
+      {{- end }}
+    </ol>
+    {{- end }}
+  </nav>
+</div>
+{{- end}}

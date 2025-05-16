@@ -1,0 +1,18 @@
+{{- $page := . }}
+
+{{- $mascotAttrs := dict "href" "/" }}
+{{- if $page.IsHome }}
+  {{- $mascotAttrs = merge $mascotAttrs (dict "class" "active" "aria-current" "page") }}
+{{- end }}
+
+<a
+  {{- range $k, $v := $mascotAttrs }}
+    {{- with $v }}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+    {{- end }}
+  {{- end -}}
+>
+{{ partial "mascot.html" (dict "width" "3rem" ) . }}
+</a>
+
+{{ partial "menu.html" (dict "menuID" "main" "page" .) }}

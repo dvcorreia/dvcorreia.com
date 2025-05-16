@@ -1,0 +1,28 @@
+{{- /*
+  Renders the mascot.
+
+  @context {id} text - HTML element ID [default=random]
+  @context {width} text - The width of the mascot [default="200px"]
+
+  @example: {{ partial "mascot.html" (dict "id" "the-id" "width" 50px) }}
+  */}}
+
+{{- $randomId := delimit (shuffle (seq 1 10)) "" }}
+{{- $id := .id | default (printf "mascot-%s" $randomId) }}
+{{- $width := .width | default "500px" }}
+
+<div
+  id="{{ $id }}"
+  class="mascot"
+  style="
+    --width: {{ $width }};
+
+    --color: var(--fg-light);
+    --hover-color: var(--link-hover);
+    --eye-color: white;
+    --pupil-color: black;
+  "
+>
+  <div class="eye"><div class="pupil"></div></div>
+  <div class="eye"><div class="pupil"></div></div>
+</div>

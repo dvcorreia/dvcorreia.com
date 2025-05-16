@@ -1,0 +1,31 @@
+
+body > footer {
+  padding: 25px 0;
+  font-size: small;
+  max-width: 500px;
+
+  p {
+    margin-bottom: 7px;
+    text-wrap: pretty;
+  }
+
+  nav * {
+    display: inline-block;
+  }
+  nav a {
+    padding: 0 1px;
+  }
+
+  svg {
+    position: relative;
+    top: 3px;
+    padding-left: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+	body > footer {
+		text-align: center;
+    margin: auto;
+	}
+}

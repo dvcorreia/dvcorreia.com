@@ -1,0 +1,20 @@
+{{ if .TableOfContents }}
+<nav>
+  <p class="contents-heading">Contents</p>
+  {{- range .Fragments.Headings }}
+  <ol>
+    {{- range .Headings }}
+    <li><a href="#{{ anchorize .ID }}">{{ .Title }}</a></li>
+    {{- if .Headings }}
+    <ol>
+      {{- range .Headings }}
+      <li><a href="#{{ anchorize .ID }}">{{ .Title }}</a></li>
+      {{- end }}
+    </ol>
+    {{- end }}
+    {{- end }}
+  </ol>
+  {{- end }}
+</nav>
+{{ end }}
+

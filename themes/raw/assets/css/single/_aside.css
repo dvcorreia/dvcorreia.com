@@ -1,0 +1,31 @@
+article header > nav, article aside {
+	float: right;
+	clear: right;
+	margin-bottom: 1rem;
+	margin-right: calc(100vw - var(--width) - var(--left-margin) - 0.7rem);
+	width: calc(var(--width) - var(--text-width) - var(--left-margin));
+	font-size: 90%;
+}
+article header > nav {
+  position: fixed;
+	left: calc(var(--width) + var(--left-margin) * 1.3);
+	margin-right: 0;
+}
+
+article p.contents-heading {
+	font-size: 85%;
+	color: var(--fg-faint);
+	text-transform: uppercase;
+}
+article nav ol { list-style-type: none; padding-left: 0; margin-bottom: 0; }
+article nav ol ol { padding-left: 1rem; }
+article nav ol ol a { color: var(--fg-faint) !important; }
+article aside dl { margin: 1rem 0 0 0; }
+article aside dt, article aside dd { padding-right: 0.2rem; }
+article aside dt { float: left; clear: left; }
+article aside dt:after { content: ": "; }
+article aside dt:not(:first-of-type), article aside dd:not(:first-of-type) {
+	padding-top: 0.5rem;
+}
+article aside details.contents { display: none; }
+article aside details.contents > *:not(summary) { padding-left: 1rem; }

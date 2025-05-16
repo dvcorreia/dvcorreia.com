@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<article>
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ partial "single/aside.html" . }}
+    {{ partial "single/toc.html" . }}
+  </header>
+
+  {{ .Content }}
+  <!-- {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }} -->
+</article>
+
+{{ end }}

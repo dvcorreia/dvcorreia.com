@@ -1,0 +1,31 @@
+{{- /*
+Renders a entry list for the given section ID.
+
+@context {string} section ID.
+@context {int} number of entries.
+
+@example: {{ partial "li.html" (dict "sectionID" "posts" "n" 5) }}
+*/}}
+
+{{ $n := .n | default 5 }}
+{{ $sectionID := .sectionID }}
+{{ $showDate := .showDate | default true }}
+<ul class="blog-posts">
+  {{ range first $n (where site.RegularPages "Section" $sectionID) }}
+  <li>
+    {{ if $showDate }}
+    <span>
+      <i>
+        <time datetime='{{ .Date.Format "2006-01-02" }}' pubdate>
+          {{ .Date.Format "02 Jan, 2006" }}
+        </time>
+      </i>
+    </span>
+    {{ end }}
+    <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+  </li>
+
+  {{ else }}
+  <li>No posts yet</li>
+  {{ end }}
+</ul>

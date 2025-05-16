@@ -1,0 +1,43 @@
+.mascot {
+  --width: 200px;
+  --color: tomato;
+  --hover-color: coral;
+  --eye-color: white;
+  --pupil-color: black;
+
+  width: var(--width);
+  height: var(--width);
+  background-color: var(--color);
+
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--width) * 0.25)) perspective(calc(var(--width))) rotateX(var(--y-angle, 0deg)) rotateY(var(--x-angle, 0deg));
+  will-change: transform;
+}
+
+.mascot:hover {
+  background-color: var(--hover-color);
+}
+
+.mascot > .eye {
+  width: calc(var(--width) * 0.25);
+  height: calc(var(--width) * 0.25);
+  border-radius: 50%;
+  background-color: var(--eye-color);
+  transform: rotate(var(--eye-angle, 0deg));
+}
+
+.mascot > .eye > .pupil {
+  width: calc(var(--width) * 0.08);
+  height: calc(var(--width) * 0.08);
+  position: relative;
+
+  background-color: var(--pupil-color);
+  border-radius: 50%;
+  top: calc(50% - (var(--width) * 0.04));
+  left: calc(5px * var(--size));
+}

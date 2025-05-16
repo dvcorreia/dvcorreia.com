@@ -3,7 +3,7 @@
 default: run
 
 run: ## Servers the site for development.
-	hugo serve -D --noHTTPCache --ignoreCache --disableFastRender
+	hugo server -D --noHTTPCache
 
 build: ## Build the site.
 	hugo --minify --environment production

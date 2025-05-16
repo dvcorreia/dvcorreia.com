@@ -1,0 +1,76 @@
+body {
+  counter-reset: sidenote-counter;
+}
+
+label.sidenote {
+  font-size: 0.8rem;
+  counter-increment: sidenote-counter;
+}
+label.sidenote sup {
+	user-select: none;
+	-webkit-user-select: none;
+	font-size: 0.7rem;
+}
+input.sidenote-toggle { display: none; }
+span.sidenote {
+	position: relative;
+	float: right;
+	clear: right;
+	margin-right: calc(-100% + var(--width) - var(--text-width) - var(--left-margin) / 4 + 0.7rem);
+	width: calc(var(--width) - var(--text-width) - var(--left-margin));
+	font-size: 0.9rem;
+}
+span.sidenote-num { display: inline-block; position: absolute; }
+span.sidenote sup { font-size: 0.7rem; margin-left: -0.7rem; }
+
+aside.footnotes { display: none; }
+
+label.sidenote sup::after {
+  content: counter(sidenote-counter)".";
+}
+span.sidenote sup::after {
+  content: counter(sidenote-counter)".";
+}
+span.sidenote img {
+  padding: 0.5rem 0;
+}
+
+input.sidenote-toggle { display: none; }
+
+@media (max-width: 82.5rem) {
+	article header > nav {
+		position: initial;
+		margin-right: calc(100vw - var(--width) - var(--left-margin) - 0.7rem);
+	}
+}
+
+@media (max-width: 62.5rem) {
+	article header > nav, span.sidenote { display: none; }
+	article aside {
+		float: none;
+		margin: 1rem 0 0 0;
+		color: var(--fg-code);
+		background-color: var(--bg-code);
+		width: auto;
+		max-width: calc(var(--text-width) - 1rem);
+		padding: 0.5rem 0.5rem;
+	}
+	article aside details.contents {
+		margin-top: 0.5rem;
+		display: block;
+	}
+	article aside dl { margin: 0; }
+	input.sidenote-toggle:checked + span.sidenote {
+		display: block;
+		position: relative;
+		float: left;
+		clear: both;
+		left: 0.25rem;
+		width: calc(95% - 0.25rem);
+		margin: 0.25rem 0rem;
+		padding: 0.25rem 1rem;
+		background-color: var(--code-bg);
+	}
+	label.sidenote { cursor: pointer; color: var(--a); }
+	label.sidenote:hover { text-decoration: underline; }
+}
