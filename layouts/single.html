@@ -3,8 +3,10 @@
 <article>
   <header>
     <h1>{{ .Title }}</h1>
+    {{ if .Params.metadata | default true }}
     {{ partial "single/aside.html" . }}
     {{ partial "single/toc.html" . }}
+    {{ end }}
   </header>
 
   {{ .Content }}
