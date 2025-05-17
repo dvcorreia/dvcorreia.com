@@ -37,6 +37,12 @@ span.sidenote img {
 
 input.sidenote-toggle { display: none; }
 
+label.sidenote:hover sup,
+label.sidenote:hover + input.sidenote-toggle + span.sidenote sup {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
 @media (max-width: 82.5rem) {
 	article header > nav {
 		position: initial;
