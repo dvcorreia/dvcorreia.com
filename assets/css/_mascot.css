@@ -7,7 +7,12 @@
 
   width: var(--width);
   height: var(--width);
+
   background-color: var(--color);
+  background-image: url("/favicon.ico");
+  background-position: center 65%;
+  background-repeat: no-repeat;
+  background-size: 170%;
 
   display: grid;
   align-items: center;
