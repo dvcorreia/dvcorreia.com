@@ -30,8 +30,8 @@ enableGitInfo = true
     weight = 20
 
   [[menus.main]]
-    name = "About"
-    pageRef = "/about"
+    name = "Now"
+    pageRef = "/now"
     weight = 30
 
 [markup]

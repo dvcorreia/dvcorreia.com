@@ -40,7 +40,3 @@ A passionate open source partisan who believes in sustainable open software deve
 
 Music is my forever loving side passion.
 I plan on hoarding music gear in direct proportion to how much space and money I can save.
-
-<!-- ## Other
-
-If you are feeling stalker, you can check my [autobiography]({{% relref "/bio" %}}). -->
