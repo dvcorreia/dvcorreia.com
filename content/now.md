@@ -4,7 +4,7 @@ title: Now
 
 Inspired by [nownownow](https://nownownow.com/about).
 
-## Codding
+## Coding
 
 I have three weeks between jobs to slow down.
 I tried to keep away from the computer as much as possible, but with limited success.
@@ -25,7 +25,7 @@ I'll be starting a new role as Senior Open-source Engineer at [Siemens](https://
 I don't fully understand what my role will encompass yet. From what I've understood, I'll be:
 
 - Advocating for open source culture
-- Maintaining <code.siemens.com> and, whenever needed, contributing to [Gitlab](https://gitlab.com/users/sign_in) upstream
+- Maintaining [code.siemens.com](code.siemens.com) and, whenever needed, contributing to [Gitlab](https://gitlab.com/users/sign_in) upstream
 - Contributing to strategic open source software projects
 - Improving developer experience, ensuring developers have a stable work environment across different devices. Hopefully I will be able to experiment with Nix ♥
 
