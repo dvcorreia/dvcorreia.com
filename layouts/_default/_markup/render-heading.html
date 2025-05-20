@@ -1,0 +1,10 @@
+{{- /* Add anchors to headings h1 through h4 */ -}}
+{{- $hasAnchor := le .Level 5 -}}
+<h{{ .Level }}{{ if $hasAnchor }} id="{{ .Anchor }}"{{ end }}>
+  <span>
+    {{ .Text | safeHTML }}
+  </span>
+  {{- if $hasAnchor }}
+    <a href="#{{ .Anchor }}">#</a>
+  {{- end }}
+</h{{ .Level }}>

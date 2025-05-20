@@ -7,6 +7,16 @@ h2 { padding-top: 0.75rem; font-size: 1.2rem; font-weight: 500; }
 h3 { padding-top: 0.75rem; font-size: 1.1rem; font-weight: 600; }
 h4 { margin-top: 0.8rem; font-size: 1rem; font-weight: 600 }
 
+/* headers anchor link */
+:where(h1, h2, h3, h4, h5) a {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+:where(h1, h2, h3, h4, h5) span:hover + a,
+:where(h1, h2, h3, h4, h5) a:hover {
+  opacity: 1;
+}
+
 /* avoid text overflows */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
