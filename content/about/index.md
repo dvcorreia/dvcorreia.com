@@ -11,12 +11,7 @@ I'm Diogo Correia, born in 1996 in Portugal.
 Started my professional [career]({{% relref "/resume" %}}) as a Software Engineer in 2021.
 On this website, you'll find technical posts, music content, and my thoughts on a variety of topics.
 
-{{< figure
-  src="/images/me2.jpg"
-  alt="Me a few days after moving to Turin in 2018"
-  caption="Me a few days after moving to [Turin](https://duckduckgo.com/?q=turin) in 2018"
-  width="50%"
->}}
+![Me a few days after moving to Turin in 2018](me.jpg "Me a few days after moving to [Turin](https://duckduckgo.com/?q=turin) in 2018.")
 
 ## Work
 

@@ -54,17 +54,17 @@ blockquote {
 	border-radius: 4px;
 }
 
-img {
+picture, img {
   display: block;
   max-width: calc(100% - 0.5rem);
   margin: auto;
-  padding: 1rem 1rem 1rem 1rem ;
+  height: auto;
 }
 figure img { margin: 0 auto; }
 figcaption { text-align: center; font-size: 0.9rem; color: var(--fg-figcaption); }
 @media (min-width: 62.5rem) {
-  img[src*="#left"] { float: left; max-width: 30%; padding-bottom: 0.5rem; }
-  img[src*="#right"] { float: right; max-width: 30%; padding-bottom: 0.5rem; }
+  img[src*="#left"]{ float: left; max-width: 30%; }
+  img[src*="#right"] { float: right; max-width: 30%; }
 }
 
 hr { border-top: 1px solid #ccc; max-width: var(--width); margin: 16px 0; }

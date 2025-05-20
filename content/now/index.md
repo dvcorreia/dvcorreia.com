@@ -33,12 +33,7 @@ I don't fully understand what my role will encompass yet. From what I've underst
 
 I recently had to leave my place in Aveiro. For now, I've moved back to my childhood village of [Porto de Mós](https://visite.portodemos.pt/).
 
-{{< figure
-  src="/images/porto-de-mos.jpg"
-  alt="Village of Porto de Mós"
-  caption="Village of [Porto de Mós](https://visite.portodemos.pt/)"
-  width="80%"
->}}
+![Village of Porto de Mós](images/porto-de-mos.jpg "Village of [Porto de Mós](https://visite.portodemos.pt/).")
 
 The future feels a bit fuzzy right now.
 I'll be legally required to work from Portugal, so my girlfriend and I are considering either finding a place to settle down or embracing the digital nomad lifestyle and moving between different locations for a while.

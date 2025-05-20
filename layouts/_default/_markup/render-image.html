@@ -1,0 +1,66 @@
+{{- /*
+Renders a markdown image.
+
+It adds responsive optimized images for diferent sizes.
+In combination with layouts/_partials/head/imgs-css.html it
+generated backgroud base64 images to show in slow networks.
+
+ref: https://www.brycewray.com/posts/2022/06/responsive-optimized-images-hugo/
+
+@example: ![Alt text](/resource/path.jpg "Figure Caption [Google link](https://google.com)")
+*/}}
+
+{{- $respSizes := slice "320" "640" "960" "1280" "1600" "1920" -}}
+{{- $alt := .Text -}}
+{{- $caption := .Title -}}
+{{- $origSrc := .Destination -}}
+
+{{- $srcParts := split $origSrc "#" -}}
+{{- $src := index $srcParts 0 -}}
+{{- $srcHash := "" -}}
+{{- if gt (len $srcParts) 1 -}}
+  {{- $srcHash := index $srcParts 1 -}}
+{{- end -}}
+
+{{- $imgBd5 := md5 $src -}}
+{{- $dataSzes := "(min-width: 1024px) 100vw, 50vw" -}}
+{{- $holder := "LQIP" -}} <!-- can be GIP or LQIP -->
+{{- $hint := "photo" -}}
+{{- $filter := "box" -}}
+
+{{- if .Page.Resources.GetMatch $src -}}
+	{{ with .Page.Resources.GetMatch $src }}
+		{{- $imgClass := print "imgB-" $imgBd5 "-" $holder -}}
+		{{- $imgRsc := . -}}
+		{{- $actualImg := $imgRsc.Process (print "resize 640x jpg " $filter) -}}
+    {{- $imgLink := $actualImg.RelPermalink -}}
+    {{- if gt (len $srcParts) 1 -}}
+      {{- $srcExtra := index $srcParts 1 -}}
+      {{- $imgLink = printf "%s#%s" $actualImg.RelPermalink $srcExtra -}}
+    {{- end -}}
+		{{- with $caption -}}<figure>{{- end }}
+			<picture>
+				<source type="image/webp" srcset="
+				{{- with $respSizes -}}
+					{{- range $i, $e := . -}}
+						{{- if ge $imgRsc.Width . -}}
+							{{- if $i }}, {{ end -}}{{- ($imgRsc.Process (print "resize " . "x webp " $hint " " $filter) ).RelPermalink }} {{ . }}w
+						{{- end -}}
+					{{- end -}}
+				{{- end -}}" sizes="{{ $dataSzes }}" />
+				<source type="image/jpeg" srcset="
+				{{- with $respSizes -}}
+					{{- range $i, $e := . -}}
+						{{- if ge $imgRsc.Width . -}}
+							{{- if $i }}, {{ end -}}{{- ($imgRsc.Process (print "resize " . "x jpg " $filter) ).RelPermalink }} {{ . }}w
+						{{- end -}}
+					{{- end -}}
+				{{- end -}}" sizes="{{ $dataSzes }}" />
+				<img src="{{ $imgLink }}" class="{{ $imgClass }}" width="{{ $imgRsc.Width }}" height="{{ $imgRsc.Height }}" alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
+			</picture>
+      {{- with $caption -}}<figcaption>{{ $caption | $.Page.RenderString }}</figcaption>{{- end }}
+      {{- with $caption -}}</figure>{{- end }}
+	{{- end -}}
+{{- else -}}
+	<p><em>Image unavailable.</em></p>
+{{- end -}}
