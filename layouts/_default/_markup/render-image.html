@@ -38,8 +38,15 @@ ref: https://www.brycewray.com/posts/2022/06/responsive-optimized-images-hugo/
       {{- $srcExtra := index $srcParts 1 -}}
       {{- $imgLink = printf "%s#%s" $actualImg.RelPermalink $srcExtra -}}
     {{- end -}}
-		{{- with $caption -}}<figure>{{- end }}
-			<picture>
+
+    {{- $modalId := print "modal-" $imgBd5 -}}
+
+    <dialog id="{{ $modalId }}">
+      <img src="{{ $imgRsc.RelPermalink }}" alt="{{ $alt }}" />
+      {{- with $caption -}}<figcaption>{{ $caption | $.Page.RenderString }}</figcaption>{{- end }}
+    </dialog>
+		{{- if $caption -}}<figure>{{- end }}
+			<picture data-modal="{{ $modalId }}">
 				<source type="image/webp" srcset="
 				{{- with $respSizes -}}
 					{{- range $i, $e := . -}}
@@ -59,7 +66,7 @@ ref: https://www.brycewray.com/posts/2022/06/responsive-optimized-images-hugo/
 				<img src="{{ $imgLink }}" class="{{ $imgClass }}" width="{{ $imgRsc.Width }}" height="{{ $imgRsc.Height }}" alt="{{ $alt }}" title="{{ $alt }}" loading="lazy" />
 			</picture>
       {{- with $caption -}}<figcaption>{{ $caption | $.Page.RenderString }}</figcaption>{{- end }}
-      {{- with $caption -}}</figure>{{- end }}
+      {{- if $caption -}}</figure>{{- end }}
 	{{- end -}}
 {{- else -}}
 	<p><em>Image unavailable.</em></p>

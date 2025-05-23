@@ -8,3 +8,27 @@ mascots.forEach(mascot => {
     renderMascot(mascot);
   }
 })
+
+const pictures = document.querySelectorAll('picture[data-modal]');
+pictures.forEach(picture => {
+  if (!(picture instanceof HTMLPictureElement)) {
+    return;
+  }
+
+  const modalId = picture.dataset.modal;
+
+  if (modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal && modal instanceof HTMLDialogElement) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.close();
+        }
+      })
+
+      picture.addEventListener('click', () => {
+        modal?.showModal();
+      });
+    };
+  }
+});

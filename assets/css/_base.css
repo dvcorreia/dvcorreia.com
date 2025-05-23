@@ -71,11 +71,36 @@ picture, img {
   height: auto;
 }
 figure img { margin: 0 auto; }
-figcaption { text-align: center; font-size: 0.9rem; color: var(--fg-figcaption); }
+figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--fg-figcaption);
+  margin-top: 1rem;
+}
 @media (min-width: 62.5rem) {
   img[src*="#left"]{ float: left; max-width: 30%; }
   img[src*="#right"] { float: right; max-width: 30%; }
 }
+
+/* image modal */
+picture[data-modal] { cursor: pointer; }
+picture[data-modal]:hover { opacity: 0.9; }
+
+dialog:has(img) {
+  max-width: 95vw;
+  max-height: 95vh;
+  border: none;
+  background: transparent;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+dialog:has(img)::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+
 
 hr { border-top: 1px solid #ccc; max-width: var(--width); margin: 16px 0; }
 
