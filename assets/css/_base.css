@@ -89,6 +89,7 @@ picture[data-modal]:hover { opacity: 0.9; }
 dialog[open]:has(img) {
   max-width: none;
   border: none;
+  outline: none;
   margin: auto;
   background: transparent;
   min-height: 100vh;

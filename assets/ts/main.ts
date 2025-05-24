@@ -28,6 +28,7 @@ pictures.forEach(picture => {
 
       picture.addEventListener('click', () => {
         modal?.showModal();
+        modal?.focus(); // avoid focusing on other element
       });
     };
   }
