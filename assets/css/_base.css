@@ -86,21 +86,22 @@ figcaption {
 picture[data-modal] { cursor: pointer; }
 picture[data-modal]:hover { opacity: 0.9; }
 
-dialog:has(img) {
-  max-width: 95vw;
-  max-height: 95vh;
+dialog[open]:has(img) {
+  max-width: none;
   border: none;
+  margin: auto;
   background: transparent;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
 }
-dialog:has(img)::backdrop {
+dialog[open]:has(img)::backdrop {
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
 }
-
+dialog[open] > img, dialog[open] figure {
+  padding: 2rem;
+}
 
 hr { border-top: 1px solid #ccc; max-width: var(--width); margin: 16px 0; }
 
