@@ -42,8 +42,10 @@ ref: https://www.brycewray.com/posts/2022/06/responsive-optimized-images-hugo/
     {{- $modalId := print "modal-" $imgBd5 -}}
 
     <dialog id="{{ $modalId }}">
+      {{- if $caption -}}<figure>{{- end }}
       <img src="{{ $imgRsc.RelPermalink }}" alt="{{ $alt }}" />
       {{- with $caption -}}<figcaption>{{ $caption | $.Page.RenderString }}</figcaption>{{- end }}
+      {{- if $caption -}}</figure>{{- end }}
     </dialog>
 		{{- if $caption -}}<figure>{{- end }}
 			<picture data-modal="{{ $modalId }}">
