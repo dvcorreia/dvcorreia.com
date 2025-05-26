@@ -16,7 +16,7 @@ body > header nav, body > footer {
 main > article > *:not(header), main > section > *:not(header) {
 	max-width: var(--text-width);
 }
-main > article > *, main > section > *:not(article) {
+main > article > *:not(dialog), main > section > *:not(article):not(dialog) {
 	margin-left: var(--left-margin);
 	margin-right: var(--right-margin);
 }

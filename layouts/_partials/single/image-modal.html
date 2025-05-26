@@ -1,0 +1,19 @@
+{{- /* Render all image dialogs collected during page processing. */}}
+
+{{- $dialogs := .Scratch.Get "imageDialogs" -}}
+{{- if $dialogs -}}
+  {{- /* deduplicate dialogs by modalId (we may have multiples of the same image) */ -}}
+  {{- $uniqueDialogs := dict -}}
+  {{- range $dialogs -}}
+    {{- $uniqueDialogs = merge $uniqueDialogs (dict .modalId .) -}}
+  {{- end -}}
+
+  {{- range $uniqueDialogs -}}
+    <dialog id="{{ .modalId }}">
+      {{- if .caption -}}<figure>{{- end }}
+      <img src="{{ .src }}" alt="{{ .alt }}" />
+      {{- with .caption -}}<figcaption>{{ . | $.RenderString }}</figcaption>{{- end }}
+      {{- if .caption -}}</figure>{{- end }}
+    </dialog>
+  {{- end -}}
+{{- end -}}
