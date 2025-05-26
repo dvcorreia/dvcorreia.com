@@ -83,8 +83,7 @@ figcaption {
 }
 
 /* image modal */
-picture[data-modal] { cursor: pointer; }
-picture[data-modal]:hover { opacity: 0.9; }
+picture[data-modal]:hover { cursor: pointer; }
 
 dialog[open]:has(img) {
   max-width: none;
