@@ -81,6 +81,7 @@ figcaption {
   img[src*="#left"]{ float: left; max-width: 30%; }
   img[src*="#right"] { float: right; max-width: 30%; }
 }
+video { margin-top: 1rem; }
 
 /* image modal */
 picture[data-modal]:hover { cursor: pointer; }

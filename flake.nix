@@ -20,10 +20,12 @@
         system:
         import nixpkgs {
           inherit system;
+          overlays = [ self.overlay ];
         }
       );
     in
     {
+      overlay = import ./nix/pkgs;
       formatter = forAllSystems (system: (nixpkgsFor.${system}).nixfmt-tree);
       devShells = forAllSystems (
         system: with nixpkgsFor.${system}; {
@@ -32,6 +34,7 @@
               git
               gnumake
               hugo
+              vid2web
             ];
           };
         }
