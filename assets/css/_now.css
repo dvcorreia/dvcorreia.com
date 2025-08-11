@@ -1,0 +1,9 @@
+.now-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.now-entry > time {
+  color: var(--fg-faint);
+}

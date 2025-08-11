@@ -1,0 +1,27 @@
+{{ define "main" }}
+
+<article>
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  {{ .Content }}
+
+  {{ $posts := first 5 (sort .Pages "Date" "desc") }}
+  {{ range $posts }}
+    <div class="now-entry">
+      <h2>{{ .Title }}</h2>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "2 Jan 2006" }}
+      </time>
+    </div>
+
+    {{ .Content }}
+
+    {{ partial "single/image-modal.html" . }}
+  {{ end }}
+</article>
+
+
+{{ end }}
+
