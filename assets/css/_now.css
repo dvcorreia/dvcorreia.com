@@ -7,3 +7,10 @@
 .now-entry > time {
   color: var(--fg-faint);
 }
+
+#now-archive-link {
+  display: block;
+  text-align: right;
+  padding-top: 2.5em;
+  color: var(--fg-faint);
+}
