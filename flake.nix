@@ -20,20 +20,36 @@
         system:
         import nixpkgs {
           inherit system;
-          overlays = [ self.overlay ];
+          overlays = [ self.overlays.default ];
         }
       );
+
+      version = self.shortRev or self.dirtyShortRev;
+      commitHash = self.rev or self.dirtyRev;
     in
     {
-      overlay = import ./nix/pkgs;
+      overlays.default = final: prev: {
+        dvcorreia-website = final.callPackage ./package.nix {
+          inherit version commitHash;
+        };
+        vid2web = final.callPackage ./nix/pkgs/vid2web.nix { };
+      };
+
       formatter = forAllSystems (system: (nixpkgsFor.${system}).nixfmt-tree);
+
+      packages = forAllSystems (system: {
+        default = (nixpkgsFor.${system}).dvcorreia-website;
+        dvcorreia-website = (nixpkgsFor.${system}).dvcorreia-website;
+        vid2web = (nixpkgsFor.${system}).vid2web;
+      });
+
       devShells = forAllSystems (
         system: with nixpkgsFor.${system}; {
           default = mkShell {
+            inputsFrom = [ dvcorreia-website ];
             packages = [
               git
               gnumake
-              hugo
               vid2web
             ];
           };

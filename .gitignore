@@ -23,3 +23,6 @@ hugo.linux
 
 # NodeJS
 node_modules
+
+# Nix
+result
