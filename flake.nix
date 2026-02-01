@@ -1,21 +1,11 @@
 {
-  description = "dvcorreia.com website";
-
-  inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
   outputs =
-    { self, nixpkgs, ... }:
+    { self, nixpkgs }:
     let
-      supportedSystems = [
-        "aarch64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
-
-      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+      inherit (nixpkgs) lib;
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
       nixpkgsFor = forAllSystems (
         system:
         import nixpkgs {
@@ -23,34 +13,42 @@
           overlays = [ self.overlays.default ];
         }
       );
-
-      version = self.shortRev or self.dirtyShortRev;
-      commitHash = self.rev or self.dirtyRev;
     in
     {
-      overlays.default = final: prev: {
-        dvcorreia-website = final.callPackage ./package.nix {
-          inherit version commitHash;
-        };
-        vid2web = final.callPackage ./nix/pkgs/vid2web.nix { };
-      };
+      packages = forAllSystems (system: import ./nix nixpkgs.legacyPackages.${system});
+      overlays.default = final: _: import ./nix final.pkgs;
 
-      formatter = forAllSystems (system: (nixpkgsFor.${system}).nixfmt-tree);
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+          devScript = pkgs.writeShellApplication {
+            name = "hugo-server";
+            runtimeInputs = pkgs.dvcorreia-com.nativeBuildInputs;
+            text = "hugo server -D --noHTTPCache --enableGitInfo";
+          };
+        in
+        {
+          default = {
+            type = "app";
+            program = "${devScript}/bin/hugo-server";
+          };
+        }
+      );
 
-      packages = forAllSystems (system: {
-        default = (nixpkgsFor.${system}).dvcorreia-website;
-        dvcorreia-website = (nixpkgsFor.${system}).dvcorreia-website;
-        vid2web = (nixpkgsFor.${system}).vid2web;
-      });
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       devShells = forAllSystems (
-        system: with nixpkgsFor.${system}; {
-          default = mkShell {
-            inputsFrom = [ dvcorreia-website ];
-            packages = [
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+        in
+        {
+          default = pkgs.mkShell {
+            inputsFrom = [ pkgs.dvcorreia-com ];
+            packages = with pkgs; [
               git
-              gnumake
-              vid2web
+              opencode
             ];
           };
         }
