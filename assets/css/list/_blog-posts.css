@@ -9,5 +9,5 @@ ul.blog-posts li {
 }
 
 ul.blog-posts li span {
-  flex: 0 0 130px;
+  flex: 0 0 8rem;
 }
