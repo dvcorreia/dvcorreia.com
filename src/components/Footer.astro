@@ -1,0 +1,91 @@
+---
+import { Icon } from "astro-icon/components";
+
+const year = new Date().getFullYear();
+
+const links = [
+	{ href: "/rss.xml", label: "RSS", icon: "mdi:rss", title: "RSS Feed" },
+	{
+		href: "https://github.com/dvcorreia",
+		label: "Github",
+		icon: "mdi:github",
+		target: "_blank",
+	},
+	{
+		href: "https://www.linkedin.com/in/diogovalacorreia/",
+		label: "Linkedin",
+		icon: "mdi:linkedin",
+		target: "_blank",
+	},
+	{
+		href: "mailto:dv_correia@hotmail.com",
+		label: "Email",
+		icon: "mdi:email-outline",
+	},
+	{
+		href: "https://github.com/dvcorreia/cv/releases/latest/download/diogo-correia-cv.pdf",
+		label: "CV",
+		target: "_blank",
+	},
+];
+---
+
+<p>
+	Site textual content &copy; {year}
+	<a href="/">Diogo Correia</a><br />
+	except where otherwise noted and/or quoting external sources. For other site-wide
+	disclaimers/credits, see the <a href="/colophon">Colophon</a>.
+</p>
+
+<nav>
+	{
+		links.map((link, i) => (
+			<>
+				{i > 0 && <span aria-hidden="true"> ·</span>}
+				<a
+					title={link.title}
+					href={link.href}
+					target={link.target}
+					rel={link.target === "_blank" ? "noopener" : undefined}
+				>
+					{link.label}
+					{link.icon && <Icon name={link.icon} />}
+				</a>
+			</>
+		))
+	}
+</nav>
+
+<style is:global>
+	@layer components {
+		body > footer {
+			padding-block: 25px;
+			font-size: 0.825rem;
+			max-inline-size: 500px;
+
+			& p {
+				margin-block-end: 7px;
+				text-wrap: pretty;
+			}
+			& nav * {
+				display: inline-block;
+			}
+			& nav a {
+				padding-inline: 1px;
+			}
+			& svg {
+				position: relative;
+				top: 3px;
+				padding-inline-start: 3px;
+			}
+		}
+
+		/* 48rem == --bp-narrow */
+		@media (max-width: 48rem) {
+			body > footer {
+				text-align: center;
+				margin-inline: auto;
+			}
+		}
+	}
+</style>

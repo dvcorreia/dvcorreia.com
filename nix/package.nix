@@ -1,12 +1,10 @@
 {
   lib,
   stdenv,
-  hugo,
   nodejs,
   pnpm,
   pnpmConfigHook,
   fetchPnpmDeps,
-  tailwindcss_4,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -16,26 +14,29 @@ stdenv.mkDerivation (finalAttrs: {
   src = ../.;
 
   nativeBuildInputs = [
-    hugo
     nodejs
     pnpmConfigHook
     pnpm
-    tailwindcss_4
   ];
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
     fetcherVersion = 3;
-    hash = "sha256-5VqqqoBK9WVj9cMQ/VXNsO71oUUC2ed5Bqb7h0Z9hLY=";
+    hash = "sha256-8D8GjmYrEtXOT2cA0aOgaoYhYxj9/j+QqWgIN9z7Umk=";
   };
 
+  # astro's config loader resolves `localhost` during the build. The Darwin
+  # build sandbox blocks that lookup by default, so allow local networking.
+  __darwinAllowLocalNetworking = true;
+
+  env.ASTRO_TELEMETRY_DISABLED = 1;
+
   buildPhase = ''
-    export PATH=$pnpmDeps/bin:$PATH
-    hugo --minify --environment production --destination=public
+    pnpm run build
   '';
 
   installPhase = ''
     mkdir -p $out/share/${finalAttrs.pname}
-    cp -r public/* $out/share/${finalAttrs.pname}/
+    cp -r dist/* $out/share/${finalAttrs.pname}/
   '';
 })

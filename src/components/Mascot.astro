@@ -1,0 +1,104 @@
+---
+interface Props {
+	width?: string;
+}
+
+const { width = "200px" } = Astro.props;
+---
+
+<div class="mascot" style={`--width: ${width};`}>
+	<div class="eye"><div class="pupil"></div></div>
+	<div class="eye"><div class="pupil"></div></div>
+</div>
+
+<script>
+	function renderMascot(mascot: HTMLDivElement) {
+		const eyes = mascot.querySelectorAll<HTMLDivElement>(".eye");
+		if (eyes.length === 0) return;
+
+		document.addEventListener("mousemove", (ev: MouseEvent) => {
+			requestAnimationFrame(() => {
+				// Recompute rects each frame so scrolling/layout shifts are handled.
+				const eyeRect = eyes[0].getBoundingClientRect();
+				const mascotRect = mascot.getBoundingClientRect();
+
+				const xPos = ev.pageX;
+				const yPos = ev.pageY;
+
+				const xDiff = eyeRect.x + eyeRect.width / 2 - xPos;
+				const yDiff = eyeRect.y + eyeRect.height / 2 - yPos;
+
+				const angle = (Math.atan2(yDiff, xDiff) * 180) / Math.PI;
+				mascot.style.setProperty("--eye-angle", angle.toFixed(2) + "deg");
+
+				// tilt the face relative to the cursor
+				const mouseX = xPos - mascotRect.x - mascotRect.width / 2;
+				const mouseY = yPos - mascotRect.y - mascotRect.height / 2;
+
+				const xAngle = 60 * (mouseX / window.innerWidth);
+				const yAngle = -60 * (mouseY / window.innerHeight);
+
+				mascot.style.setProperty("--x-angle", xAngle.toFixed(2) + "deg");
+				mascot.style.setProperty("--y-angle", yAngle.toFixed(2) + "deg");
+			});
+		});
+	}
+
+	document
+		.querySelectorAll<HTMLDivElement>(".mascot")
+		.forEach((mascot) => renderMascot(mascot));
+</script>
+
+<style is:global>
+	@layer components {
+		.mascot {
+			--width: 200px;
+			--color: var(--fg-light);
+			--hover-color: var(--link-hover);
+			--eye-color: white;
+			--pupil-color: black;
+
+			width: var(--width);
+			height: var(--width);
+
+			background-color: var(--color);
+			background-image: url("/favicon.ico");
+			background-position: center 65%;
+			background-repeat: no-repeat;
+			background-size: 170%;
+
+			display: grid;
+			align-items: center;
+			justify-items: center;
+			grid-template-columns: 1fr 1fr;
+
+			transform-style: preserve-3d;
+			transform: translateZ(calc(var(--width) * 0.25))
+				perspective(calc(var(--width))) rotateX(var(--y-angle, 0deg))
+				rotateY(var(--x-angle, 0deg));
+			will-change: transform;
+
+			&:hover {
+				background-color: var(--hover-color);
+			}
+
+			& > .eye {
+				width: calc(var(--width) * 0.25);
+				height: calc(var(--width) * 0.25);
+				border-radius: 50%;
+				background-color: var(--eye-color);
+				transform: rotate(var(--eye-angle, 0deg));
+
+				& > .pupil {
+					width: calc(var(--width) * 0.08);
+					height: calc(var(--width) * 0.08);
+					position: relative;
+
+					background-color: var(--pupil-color);
+					border-radius: 50%;
+					top: calc(50% - (var(--width) * 0.04));
+				}
+			}
+		}
+	}
+</style>

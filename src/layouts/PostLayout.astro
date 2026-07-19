@@ -1,0 +1,190 @@
+---
+import type { MarkdownHeading } from "astro";
+import BaseLayout from "./BaseLayout.astro";
+import Aside from "../components/Aside.astro";
+import TocList from "../components/TocList.astro";
+import { buildToc } from "../lib/toc";
+
+interface Props {
+	title: string;
+	description?: string;
+	pubDate?: Date;
+	updatedDate?: Date;
+	status?: string;
+	minutesRead?: string;
+	metadata?: boolean;
+	toc?: boolean;
+	headings?: MarkdownHeading[];
+}
+
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	status,
+	minutesRead,
+	metadata = true,
+	toc = true,
+	headings,
+} = Astro.props;
+
+const desktopToc = buildToc(headings);
+const showDesktopToc = metadata && toc && desktopToc.length > 0;
+---
+
+<BaseLayout title={title} description={description}>
+	<article>
+		<header>
+			<h1>{title}</h1>
+			{
+				metadata && (
+					<Aside
+						pubDate={pubDate}
+						updatedDate={updatedDate}
+						status={status}
+						minutesRead={minutesRead}
+						headings={headings}
+						showToc={toc}
+					/>
+				)
+			}
+			{
+				showDesktopToc && (
+					<nav class="article-toc">
+						<p class="contents-heading">Contents</p>
+						<TocList items={desktopToc} />
+					</nav>
+				)
+			}
+		</header>
+
+		<slot />
+	</article>
+</BaseLayout>
+
+<style is:global>
+	@layer components {
+		/* ---- Article gutter (metadata + table of contents) ----------------
+		   The article inherits the page frame's columns via subgrid (set on
+		   <main> and <article> in the base layer), so its content lands in the
+		   shared reading column and lines up with the site header/footer. Here
+		   we place the post-only metadata aside and TOC into the dedicated aside
+		   column to the right, stacked: metadata on top (scrolls away), TOC
+		   below (sticky). */
+
+		/* Metadata aside → aside column, top row. Scrolls away with the content. */
+		main > article > header > aside {
+			grid-column: aside;
+			grid-row: 2;
+			align-self: start;
+			font-size: 90%;
+			max-inline-size: var(--aside-width);
+		}
+
+		/* TOC → aside column, directly below the metadata aside. Sticky. */
+		main > article > header > .article-toc {
+			grid-column: aside;
+			grid-row: 3 / span 9999;
+			align-self: start;
+			position: sticky;
+			top: 1rem;
+			font-size: 90%;
+			max-inline-size: var(--aside-width);
+		}
+		main > article > header > aside > * + *,
+		main > article > header > .article-toc > * + * {
+			margin-block-start: 1rem;
+		}
+
+		main > article > header > .article-toc {
+			margin-block-start: 1rem;
+		}
+
+		article p.contents-heading {
+			font-size: 85%;
+			color: var(--fg-faint);
+			text-transform: uppercase;
+		}
+
+		article nav ol {
+			list-style-type: none;
+			padding-inline-start: 0;
+			margin-block-end: 0;
+
+			& ol {
+				padding-inline-start: 1rem;
+
+				& a {
+					color: var(--fg-faint);
+				}
+			}
+		}
+
+		article aside dl {
+			margin-block-start: 1rem;
+
+			& dt,
+			& dd {
+				padding-inline-end: 0.2rem;
+			}
+			& dt {
+				float: left;
+				clear: left;
+
+				&::after {
+					content: ": ";
+				}
+			}
+			& dt:not(:first-of-type),
+			& dd:not(:first-of-type) {
+				padding-block-start: 0.5rem;
+			}
+		}
+
+		article aside details.contents {
+			display: none;
+
+			& > *:not(summary) {
+				padding-inline-start: 1rem;
+			}
+		}
+
+		/* Below --bp-page (62.5rem): collapse to a single column; the metadata
+		   aside becomes a boxed panel and its inline <details> TOC appears. */
+		@media (max-width: 62.5rem) {
+			/* Collapse the article to a single block in the reading column; the
+			   shared frame grid still centres it with the header/footer. */
+			main > article {
+				display: block;
+				grid-column: content;
+			}
+			main > article > header {
+				display: block;
+			}
+			main > article > header > aside,
+			main > article > header > .article-toc {
+				position: static;
+				font-size: inherit;
+				max-inline-size: none;
+			}
+			.article-toc {
+				display: none;
+			}
+			main > article > header > aside {
+				margin: 1rem 0 0 0;
+				color: var(--fg-code);
+				background-color: var(--bg-code);
+				max-inline-size: calc(var(--text-width) - 1rem);
+				padding: 0.5rem;
+			}
+			article aside details.contents {
+				margin-block-start: 0.5rem;
+				display: block;
+			}
+			article aside dl {
+				margin: 0;
+			}
+		}
+	}
+</style>

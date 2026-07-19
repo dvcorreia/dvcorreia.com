@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const posts = (
+	await getCollection("posts", ({ data }) =>
+		import.meta.env.PROD ? !data.draft : true,
+	)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Posts" description="Posts by Diogo Correia.">
+	<section>
+		<h1>Posts</h1>
+
+		<ul class="blog-posts">
+			{
+				posts.length === 0 ? (
+					<li>No posts yet</li>
+				) : (
+					posts.map((post) => (
+						<li>
+							<span>
+								<i>
+									<FormattedDate date={post.data.pubDate} />
+								</i>
+							</span>
+							<a href={`/posts/${post.id}/`}>{post.data.title}</a>
+						</li>
+					))
+				)
+			}
+		</ul>
+	</section>
+</BaseLayout>
+
+<style is:global>
+	@layer components {
+		ul.blog-posts {
+			list-style-type: none;
+			padding-block-start: 1rem;
+
+			& li {
+				display: flex;
+				margin: 0;
+
+				& span {
+					flex: 0 0 8rem;
+				}
+			}
+		}
+	}
+</style>

@@ -1,0 +1,394 @@
+/* Cascade layers — later layers win over earlier ones. */
+@layer reset, base, theme, components;
+
+/* =========================================================================
+   Reset — https://www.joshwcomeau.com/css/custom-css-reset/
+   ========================================================================= */
+
+@layer reset {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	:where(
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		p,
+		figure,
+		blockquote,
+		dl,
+		dd,
+		ul,
+		ol,
+		pre
+	) {
+		margin: 0;
+	}
+
+	:where(ul, ol) {
+		padding: 0;
+	}
+
+	:where(table) {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	:where(img, picture, video, canvas, svg) {
+		display: block;
+		max-inline-size: 100%;
+		block-size: auto;
+	}
+
+	:where(input, button, textarea, select) {
+		font: inherit;
+	}
+}
+
+/* =========================================================================
+   Design tokens
+   ========================================================================= */
+
+@layer theme {
+	:root {
+		color-scheme: light dark;
+
+		/* Layout. --width caps the article grid; --text-width is the reading
+		   column; --frame-pad keeps content off the viewport edges. */
+		--width: 60rem;
+		--text-width: 40rem;
+		--frame-pad: 1rem;
+
+		/* Breakpoints (mirrored inline in media queries; see comments). */
+		--bp-page: 62.5rem; /* below: single column, hide fixed TOC */
+		--bp-narrow: 48rem; /* below: center the footer */
+
+		/* Fonts */
+		--mono-font: ui-monospace, Menlo, Consolas, monospace;
+		--text-font: -apple-system, system-ui, Input, Helvetica, sans-serif;
+
+		/* Colors — light-dark() resolves per color-scheme. */
+		--bg: light-dark(#fff, #181818);
+		--fg: light-dark(rgba(0, 0, 0, 0.95), #eee);
+		--fg-faint: light-dark(#777, #bbb);
+		--fg-light: light-dark(hsl(0, 0%, 75%), hsl(0, 0%, 35%));
+		--fg-code: light-dark(#000, #ddd);
+		--bg-code: light-dark(#f0f0f0, #282828);
+		--link-hover: light-dark(#005aff, #62b3ff);
+
+		--fg-figcaption: var(--fg-faint);
+		--q-border: var(--fg-light);
+	}
+}
+
+/* =========================================================================
+   Base — layout + typography for bare elements
+   ========================================================================= */
+
+@layer base {
+	body {
+		background: var(--bg);
+		color: var(--fg);
+		line-height: 1.45;
+		font-family: var(--text-font);
+		text-rendering: optimizeLegibility;
+		font-variant-ligatures: common-ligatures;
+		hanging-punctuation: first last;
+		scrollbar-gutter: stable;
+	}
+
+	/* Page frame: one shared grid on <body> defines the reading column once, so
+	   the site header, post content, sections and footer all line up on exactly
+	   the same edges — alignment is structural, not arithmetic.
+
+	   Columns: [left gutter] [left mirror] [content] [gap] [aside] [right gutter].
+	   The reading column has a FIXED width (--text-width) so it never shrinks
+	   above --bp-page. It is centred in the VIEWPORT, ignoring the aside: the
+	   left "mirror" column reserves the same width as the gap+aside on the right
+	   (--aside-reach) and the two 1fr gutters are equal, so the content sits
+	   dead-centre while the aside merely overflows into the right margin.
+
+	   As the viewport narrows the two 1fr gutters shrink to their --frame-pad
+	   floor first; after that the LEFT MIRROR is what gives way (its min is 0),
+	   so the content shifts left and the aside stays put — space is taken from
+	   the empty left column, never from the reading column. Below --bp-page the
+	   aside/gap/mirror collapse to zero and the frame is a single centred
+	   column. */
+	body {
+		--aside-width: calc(var(--width) - var(--text-width));
+		--aside-gap: 1rem;
+		--aside-reach: calc(var(--aside-width) + var(--aside-gap));
+		display: grid;
+		grid-template-columns:
+			[frame-start gutter-left-start] minmax(var(--frame-pad), 1fr)
+			[gutter-left-end mirror-start] minmax(0, var(--aside-reach))
+			[mirror-end content-start] var(--text-width)
+			[content-end aside-gap-start] var(--aside-gap)
+			[aside-gap-end aside-start] var(--aside-width)
+			[aside-end gutter-right-start] minmax(var(--frame-pad), 1fr)
+			[gutter-right-end frame-end];
+		align-content: start;
+	}
+
+	/* Below --bp-page: drop the aside, its gap and the left mirror so the frame
+	   is a single centred reading column ([gutter] [content] [gutter]). The
+	   article's aside moves inline below the content (see PostLayout media
+	   query). Content flexes here so it can fit narrow phones. */
+	@media (max-width: 62.5rem) {
+		body {
+			--aside-width: 0px;
+			--aside-gap: 0px;
+			--aside-reach: 0px;
+			grid-template-columns:
+				[frame-start gutter-left-start] minmax(var(--frame-pad), 1fr)
+				[gutter-left-end mirror-start] 0
+				[mirror-end content-start] minmax(0, var(--text-width))
+				[content-end aside-gap-start] 0
+				[aside-gap-end aside-start] 0
+				[aside-end gutter-right-start] minmax(var(--frame-pad), 1fr)
+				[gutter-right-end frame-end];
+		}
+	}
+
+	/* Header, footer and sections occupy the reading column; the grid centres
+	   them, so no auto margins are needed. */
+	body > header,
+	body > footer {
+		grid-column: content;
+	}
+
+	/* <main> spans the full grid and forwards the columns to the article via
+	   subgrid, so article content and its aside align with the frame. */
+	body > main {
+		grid-column: frame;
+		display: grid;
+		grid-template-columns: subgrid;
+	}
+
+	/* Sections in a plain <main> (non-article pages) sit in the content column. */
+	main > section {
+		grid-column: content;
+	}
+
+	/* Any <article> inherits the frame columns via subgrid so its content lands
+	   in the shared reading column and lines up with the header/footer. This is
+	   global (not PostLayout-only) so simple article pages — e.g. /now — align
+	   too. The aside/TOC placement lives in PostLayout, which is the only layout
+	   that renders them. `header { display: contents }` lifts the article's
+	   header children up so the subgrid can place each. */
+	main > article {
+		grid-column: frame;
+		display: grid;
+		grid-template-columns: subgrid;
+		align-items: start;
+		column-gap: 0;
+		row-gap: 0;
+	}
+
+	main > article > header {
+		display: contents;
+	}
+
+	/* Article content flows down the reading column. Aside/TOC (post pages only)
+	   are re-placed into the aside column by PostLayout. */
+	main > article > *,
+	main > article > header > :not(aside):not(.article-toc) {
+		grid-column: content;
+	}
+
+	/* Article children fill the grid tracks; cap without re-adding margins. */
+	main > article > *:not(header) {
+		max-inline-size: var(--text-width);
+	}
+
+	/* ---- Headings ------------------------------------------------------ */
+
+	h1 {
+		font-size: 1.3rem;
+		line-height: 1;
+		font-weight: 500;
+		padding-block: 0.8rem 0.5rem;
+	}
+	h2 {
+		padding-block-start: 0.5rem;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+	h3 {
+		padding-block-start: 0.75rem;
+		font-size: 1.1rem;
+		font-weight: 600;
+	}
+	h4 {
+		margin-block-start: 0.8rem;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	:where(p, h1, h2, h3, h4, h5, h6) {
+		overflow-wrap: break-word;
+	}
+	p {
+		text-wrap: pretty;
+	}
+	:where(h1, h2, h3, h4, h5, h6) {
+		text-wrap: balance;
+	}
+
+	/* ---- Vertical rhythm ---------------------------------------------- */
+
+	article p,
+	footer p,
+	aside p,
+	pre,
+	blockquote,
+	article > ul {
+		margin-block-start: 0.9rem;
+	}
+	article header p {
+		margin-block-start: 0;
+	}
+
+	/* ---- Links --------------------------------------------------------- */
+
+	a:where(:link, :visited) {
+		color: var(--fg);
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.1rem;
+		text-decoration-color: var(--fg-light);
+	}
+	a:hover {
+		color: var(--link-hover);
+		text-decoration-color: var(--link-hover);
+	}
+	a::after {
+		font-size: 0.6rem;
+		vertical-align: super;
+	}
+	a[href*="//"]::after {
+		content: "\00A0↗";
+	}
+	a[href^="http:"]::after {
+		content: "\00A0!";
+	}
+	a:where([href$=".pdf"], [href$=".zip"], [href$=".gz"])::after {
+		content: "\00A0↓";
+	}
+
+	sup {
+		vertical-align: super;
+		font-size: 0.8rem;
+		line-height: 0;
+	}
+
+	/* ---- Blockquote ---------------------------------------------------- */
+
+	blockquote {
+		quotes: none;
+		padding-inline-start: 0.5rem;
+		border-inline-start: 4px solid var(--q-border);
+		border-radius: 4px;
+	}
+
+	/* ---- Media --------------------------------------------------------- */
+
+	picture,
+	img {
+		display: block;
+		max-inline-size: calc(100% - 0.5rem);
+		margin-inline: auto;
+		block-size: auto;
+		padding: 1rem 0;
+		margin-top: 1rem;
+	}
+	@media (prefers-color-scheme: dark) {
+		img[src*="svg"] {
+			/* adds contrast for transparent backgrounds */
+			filter: invert(1) hue-rotate(90deg);
+		}
+	}
+	figure img {
+		margin-inline: auto;
+	}
+	figcaption {
+		max-inline-size: 60ch;
+		margin-inline: auto;
+		text-align: center;
+		font-size: 0.9rem;
+		color: var(--fg-figcaption);
+		margin-block-start: 1rem;
+	}
+	video {
+		margin-block-start: 1rem;
+	}
+
+	/* ---- Rules & lists ------------------------------------------------- */
+
+	hr {
+		border: none;
+		border-top: 1px solid var(--fg-light);
+		max-inline-size: var(--width);
+		margin-block: 16px;
+	}
+
+	main ul li {
+		list-style-type: "–  ";
+		margin-inline-start: 1rem;
+	}
+	article ul ul {
+		margin: 0;
+	}
+	article ol {
+		padding-inline-start: 2rem;
+		max-inline-size: calc(var(--text-width) - 2rem);
+	}
+
+	/* ---- Code ---------------------------------------------------------- */
+
+	code {
+		font-family: var(--mono-font);
+		font-size: 90%;
+		background-color: var(--bg-code);
+		color: var(--fg-code);
+	}
+	pre {
+		color: var(--fg-code);
+		background-color: var(--bg-code);
+		font-family: var(--mono-font);
+		padding: 0.5rem 0 0.5rem 0.5rem;
+		font-size: 0.95rem;
+		white-space: pre-wrap;
+		tab-size: 4;
+		overflow-x: auto;
+	}
+	pre code {
+		background: none;
+	}
+
+	/* ---- Keyboard ------------------------------------------------------ */
+
+	kbd {
+		font-family: var(--mono-font);
+		font-size: 90%;
+		background-color: var(--bg-code);
+		color: var(--fg-code);
+		padding: 0.1rem 0.35rem;
+		border-radius: 4px;
+		border: 1px solid var(--fg-light);
+	}
+
+	/* ---- Focus --------------------------------------------------------- */
+
+	:focus-visible {
+		outline: 2px solid var(--link-hover);
+		outline-offset: 2px;
+	}
+}

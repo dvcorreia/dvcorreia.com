@@ -1,0 +1,74 @@
+---
+import PostLayout from "../layouts/PostLayout.astro";
+import { Image } from "astro:assets";
+import me from "../assets/me.jpg";
+---
+
+<PostLayout
+	title="About Me"
+	description="A little bit about myself."
+	metadata={false}
+>
+	<p>If you ended up here, you probably have a few questions about who I am.</p>
+
+	<h2>TL;DR</h2>
+
+	<p>
+		I'm Diogo Correia, born in 1996 in Portugal. Started my professional <a
+			href="/resume">career</a
+		> as a Software Engineer in 2021. On this website, you'll find technical posts,
+		music content, and my thoughts on a variety of topics.
+	</p>
+
+	<figure>
+		<Image
+			src={me}
+			alt="Me a few days after moving to Turin in 2018"
+			loading="lazy"
+		/>
+		<figcaption>
+			Me a few days after moving to <a href="https://duckduckgo.com/?q=turin"
+				>Turin</a
+			> in 2018.
+		</figcaption>
+	</figure>
+
+	<h2>Work</h2>
+
+	<p>
+		I work as a software engineer. You can learn more about my professional
+		experience on my <a href="/resume">resumé</a>.
+	</p>
+
+	<p>
+		I'm a generalist programmer. From putting <a href="https://webassembly.org/"
+			>WebAssembly</a
+		> in microcontrollers, working on neuroscience browser applications, writing a
+		Bluetooth Low Energy firewall, to deploying policy engines to Kubernetes, I've
+		loved working through it all.
+	</p>
+
+	<p>
+		I've been a bit self-conscious about this, but I'm starting to feel
+		comfortable with it. The fallacy is that a generalist is not a master of
+		anything. I believe that with great commitment, being a generalist is being
+		fluent on many things. It sharpens your understanding on what is possible
+		and how it can be done.
+	</p>
+
+	<h2>Technical Interests</h2>
+
+	<p>
+		I ♥ <a href="https://nixos.org/">Nix &amp; NixOS</a>. I'm a <a
+			href="https://go.dev/">Go</a
+		> enthusiast and <a href="https://www.cncf.io/">Cloud Native</a> advocate. A passionate
+		open source partisan who believes in sustainable open software development.
+	</p>
+
+	<h2>When Not Coding</h2>
+
+	<p>
+		Music is my forever loving side passion. I plan on hoarding music gear in
+		direct proportion to how much space and money I can save.
+	</p>
+</PostLayout>
