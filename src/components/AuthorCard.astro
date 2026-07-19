@@ -1,0 +1,41 @@
+---
+import Mascot from "./Mascot.astro";
+import { SITE_AUTHOR, SITE_TAGLINE, SITE_BIO } from "../consts";
+
+const links = [
+	{ href: "https://github.com/dvcorreia", label: "GitHub", target: "_blank" },
+	{
+		href: "https://www.linkedin.com/in/diogovalacorreia/",
+		label: "LinkedIn",
+		target: "_blank",
+	},
+	{ href: "mailto:dv_correia@hotmail.com", label: "Mail" },
+	{ href: "/rss.xml", label: "RSS" },
+];
+---
+
+<aside class="author-card">
+	<a href="/about" class="author-card__avatar" tabindex="-1" aria-hidden="true">
+		<Mascot width="4.5rem" />
+	</a>
+	<h2 class="author-card__name">
+		<a href="/about" rel="author">{SITE_AUTHOR}</a>
+	</h2>
+	<p class="author-card__tagline">{SITE_TAGLINE}</p>
+	<p class="author-card__bio" set:html={SITE_BIO} />
+	<ul class="author-card__contact">
+		{
+			links.map((link) => (
+				<li>
+					<a
+						href={link.href}
+						target={link.target}
+						rel={link.target === "_blank" ? "me noopener" : "me"}
+					>
+						{link.label}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</aside>

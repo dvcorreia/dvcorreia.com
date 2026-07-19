@@ -1,0 +1,81 @@
+---
+import type { MarkdownHeading } from "astro";
+import FormattedDate from "./FormattedDate.astro";
+import { buildToc } from "../lib/toc";
+import TocList from "./TocList.astro";
+
+interface Props {
+	pubDate?: Date;
+	updatedDate?: Date;
+	status?: string;
+	minutesRead?: string;
+	headings?: MarkdownHeading[];
+	showToc?: boolean;
+	tocMaxDepth?: number;
+}
+
+const {
+	pubDate,
+	updatedDate,
+	status,
+	minutesRead,
+	headings = [],
+	showToc = true,
+	tocMaxDepth = 3,
+} = Astro.props;
+
+const toc = buildToc(headings, tocMaxDepth);
+const hasToc = showToc && toc.length > 0;
+---
+
+<aside>
+	<dl>
+		{
+			pubDate && (
+				<>
+					<dt>Created</dt>
+					<dd>
+						<FormattedDate date={pubDate} />
+					</dd>
+				</>
+			)
+		}
+		{
+			updatedDate && (
+				<>
+					<dt>Updated</dt>
+					<dd>
+						<FormattedDate date={updatedDate} />
+					</dd>
+				</>
+			)
+		}
+		{
+			minutesRead && (
+				<>
+					<dt>Length</dt>
+					<dd>{minutesRead}</dd>
+				</>
+			)
+		}
+		{
+			status && (
+				<>
+					<dt>Status</dt>
+					<dd>{status}</dd>
+				</>
+			)
+		}
+	</dl>
+
+	{
+		hasToc && (
+			<details class="contents">
+				<summary>Contents</summary>
+				<nav>
+					<TocList items={toc} />
+				</nav>
+			</details>
+		)
+	}
+</aside>

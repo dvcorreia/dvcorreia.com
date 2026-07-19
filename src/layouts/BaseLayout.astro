@@ -1,0 +1,37 @@
+---
+import Head from "../components/Head.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import type { ImageMetadata } from "astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: ImageMetadata;
+}
+
+const {
+	title = SITE_TITLE,
+	description = SITE_DESCRIPTION,
+	image,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<Head title={title} description={description} image={image} />
+	</head>
+	<body>
+		<header>
+			<Header />
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<Footer />
+		</footer>
+	</body>
+</html>

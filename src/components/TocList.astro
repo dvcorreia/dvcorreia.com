@@ -1,0 +1,21 @@
+---
+import type { TocNode } from "../lib/toc";
+import Self from "./TocList.astro";
+
+interface Props {
+	items: TocNode[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol>
+	{
+		items.map(({ heading, children }) => (
+			<li>
+				<a href={`#${heading.slug}`}>{heading.text}</a>
+				{children.length > 0 && <Self items={children} />}
+			</li>
+		))
+	}
+</ol>

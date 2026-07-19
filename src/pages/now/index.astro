@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+
+const entries = (await getCollection("now")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const latest = entries.slice(0, 5);
+const rendered = await Promise.all(
+	latest.map(async (entry) => ({
+		entry,
+		Content: (await render(entry)).Content,
+	})),
+);
+---
+
+<BaseLayout title="Now" description="What Diogo Correia is up to right now.">
+	<article>
+		<header>
+			<h1>Now</h1>
+		</header>
+
+		<p>
+			Inspired by <a href="https://nownownow.com/about">nownownow</a>.
+		</p>
+
+		{
+			rendered.map(({ entry, Content }) => (
+				<>
+					<div class="now-entry">
+						<h2>{entry.data.title}</h2>
+						<FormattedDate date={entry.data.pubDate} />
+					</div>
+					<Content />
+				</>
+			))
+		}
+	</article>
+</BaseLayout>
+
+<style is:global>
+	@layer components {
+		.now-entry {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+
+			& > time {
+				color: var(--fg-faint);
+			}
+		}
+	}
+</style>
