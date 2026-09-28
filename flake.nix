@@ -24,9 +24,6 @@
         {
           default = pkgs.mkShell {
             inputsFrom = [ pkgs.dvcorreia-com ];
-            packages = [
-              pkgs.playwright-mcp
-            ];
           };
         }
       );
