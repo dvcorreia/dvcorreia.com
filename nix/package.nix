@@ -21,8 +21,9 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    fetcherVersion = 3;
-    hash = "sha256-qMo2NH0xvGDZnD77V/HJoK9fZ+s2LqNH0kuwwWKk0u4=";
+    inherit pnpm;
+    fetcherVersion = 5;
+    hash = "sha256-Bl5i+4XmiClGgxlS2SJTJJSaKUxjfa7r9YToQd/qVQY=";
   };
 
   # astro's config loader resolves `localhost` during the build. The Darwin
