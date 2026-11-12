@@ -11,7 +11,26 @@
       packages = forAllSystems (system: import ./nix nixpkgs.legacyPackages.${system});
       overlays.default = final: _: import ./nix final.pkgs;
 
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.nixfmt-tree.override {
+          runtimeInputs = [ pkgs.pnpm ];
+          settings.formatter.prettier = {
+            command = "pnpm";
+            options = [
+              "exec"
+              "prettier"
+              "--write"
+              "--ignore-unknown"
+            ];
+            includes = [ "*" ];
+            excludes = [ "*.nix" ];
+          };
+        }
+      );
 
       devShells = forAllSystems (
         system:
